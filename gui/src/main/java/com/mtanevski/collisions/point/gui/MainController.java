@@ -1,10 +1,10 @@
 package com.mtanevski.collisions.point.gui;
 
 import com.mtanevski.collisions.point.gui.canvas.Kanvas;
-import com.mtanevski.collisions.point.gui.canvas.Overlay;
 import com.mtanevski.collisions.point.gui.canvas.coordinatesystem.CoordinateSystem;
-import com.mtanevski.collisions.point.gui.canvas.point2d.DrawablePoint2D;
-import com.mtanevski.collisions.point.gui.canvas.vector2d.Vector2DGraphic;
+import com.mtanevski.collisions.point.gui.commands.CommandsHistory;
+import com.mtanevski.collisions.point.gui.commands.CreatePoint2dCommand;
+import com.mtanevski.collisions.point.gui.commands.CreateVector2dCommand;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.*;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
@@ -31,6 +30,8 @@ public class MainController extends VBox {
     @FXML
     private VBox propertiesPane;
     private Kanvas kanvas;
+
+    private final CommandsHistory commandsHistory = new CommandsHistory();
 
     public void initialize() {
         initializeKanvas();
@@ -64,24 +65,9 @@ public class MainController extends VBox {
             if (db.hasString()) {
                 String draggedItem = db.getString();
                 if ("Vector2D".equals(draggedItem)) {
-                    Platform.runLater(() -> {
-
-                        Vector2DGraphic vector2DGraphic = Overlay.drawVector2D();
-                        GridPane editPropertiesPane = vector2DGraphic.getEditPropertiesPane();
-                        vector2DGraphic.onDrag(() -> switchPropertiesPane(editPropertiesPane));
-                        switchPropertiesPane(editPropertiesPane);
-
-                    });
+                    commandsHistory.add(new CreateVector2dCommand(this));
                 } else if ("Point2D".equals(draggedItem)) {
-                    Platform.runLater(() -> {
-
-                        DrawablePoint2D drawablePoint2D = Overlay.drawPoint2D();
-                        GridPane editPropertiesPane = drawablePoint2D.getEditPropertiesPane();
-                        drawablePoint2D.onDrag(() -> switchPropertiesPane(editPropertiesPane));
-                        switchPropertiesPane(editPropertiesPane);
-
-
-                    });
+                    commandsHistory.add(new CreatePoint2dCommand(this));
                 }
 
                 success = true;
@@ -92,7 +78,7 @@ public class MainController extends VBox {
     }
 
     private void initializeObjectsList() {
-        objectsList.getItems().addAll("Vector2D", "Point2D");
+        objectsList.getItems().addAll(Constants.OBJECTS);
         objectsList.setCellFactory(new Callback<>() {
             @Override
             public ListCell<String> call(ListView<String> param) {
@@ -118,7 +104,7 @@ public class MainController extends VBox {
         });
     }
 
-    private void switchPropertiesPane(Node editPropertiesPane) {
+    public void switchPropertiesPane(Node editPropertiesPane) {
         propertiesPane.getChildren().clear();
         propertiesPane.getChildren().addAll(editPropertiesPane);
     }
@@ -127,11 +113,12 @@ public class MainController extends VBox {
         PickResult pickResult = mouseEvent.getPickResult();
         double x = pickResult.getIntersectedPoint().getX();
         double y = pickResult.getIntersectedPoint().getY();
-        if (pickResult.getIntersectedNode() instanceof Canvas && this.coordinateSystem.isOriginCenter()) {
-            x = x - canvas.getWidth() / 2;
-            y = y - canvas.getHeight() / 2;
+        if (pickResult.getIntersectedNode() instanceof Canvas
+                && this.coordinateSystem.isOriginCenter()) {
+            x =  (x - canvas.getWidth() / 2);
+            y = (y - canvas.getHeight() / 2);
         }
-        this.mouseCoordinates.setText(x + "," + y);
+        this.mouseCoordinates.setText(String.format("%d,%d", (int)x, (int)y));
     }
 
     private void draw() {

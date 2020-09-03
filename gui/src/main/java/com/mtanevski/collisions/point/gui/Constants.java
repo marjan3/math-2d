@@ -3,6 +3,9 @@ package com.mtanevski.collisions.point.gui;
 import javafx.scene.paint.Color;
 
 public interface Constants {
+
+    String[] OBJECTS = { "Vector2D", "Point2D" };
+
     interface Canvas {
         double WIDTH = 800;
         double HEIGHT = 600;

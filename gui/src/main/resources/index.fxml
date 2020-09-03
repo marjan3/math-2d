@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="953.0" prefWidth="1493.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mtanevski.collisions.point.gui.MainController">
+<VBox prefHeight="953.0" prefWidth="1493.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar>
         <menus>
@@ -83,7 +83,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </Label>
-            <Label fx:id="mouseCoordinates" text="Unknown, Uknown" />
+            <Label fx:id="mouseCoordinates" text="Unknown, Unknown" />
          </buttons>
       </ButtonBar>
    </children>

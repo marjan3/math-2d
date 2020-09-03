@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mtanevski.2dcollisions.point</groupId>
-    <artifactId>point-2d-collisions</artifactId>
+    <artifactId>point2d-collisions</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1</version>
 
