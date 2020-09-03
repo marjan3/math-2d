@@ -32,12 +32,6 @@ This section will describe requirements needed to satisfy the installation or ru
 ### Test
  - Run `mvn test`
 
-## Usage guide
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.  
-
-## Download
- - The application is now available as a JAR file. Within the `dist/` directory of this repository the executable JAR file can be found.
-
 ## Future changes
  - Add Spring Support for GUI
  - Improve GUI interaction
