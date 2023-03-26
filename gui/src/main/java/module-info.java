@@ -1,11 +1,12 @@
 module gui {
+    requires lombok;
     requires javafx.controls;
     requires javafx.fxml;
     requires math;
 
-    exports com.mtanevski.collisions.point.gui.canvas.coordinatesystem;
-    exports com.mtanevski.collisions.point.gui.canvas.point2d;
-    exports com.mtanevski.collisions.point.gui.canvas.vector2d;
+    exports com.mtanevski.math2d.gui.canvas.coordinatesystem;
+    exports com.mtanevski.math2d.gui.canvas.point;
+    exports com.mtanevski.math2d.gui.canvas.vector;
 
-    opens com.mtanevski.collisions.point.gui;
+    opens com.mtanevski.math2d.gui;
 }

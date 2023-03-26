@@ -6,8 +6,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>point-2d-collisions</artifactId>
-        <groupId>com.mtanevski.2dcollisions.point</groupId>
+        <artifactId>math-2d</artifactId>
+        <groupId>com.mtanevski.math2d</groupId>
         <version>0.0.1</version>
     </parent>
 

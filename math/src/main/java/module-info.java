@@ -1,3 +1,3 @@
 module math {
-    exports com.mtanevski.collisions.point.math;
+    exports com.mtanevski.math2d.math;
 }
