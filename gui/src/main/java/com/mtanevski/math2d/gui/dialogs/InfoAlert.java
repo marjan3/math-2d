@@ -1,16 +1,16 @@
 package com.mtanevski.math2d.gui.dialogs;
 
+import com.mtanevski.math2d.gui.Constants;
 import javafx.scene.control.Alert;
 
 public class InfoAlert extends Alert {
 
     private InfoAlert(String title, String information) {
         super(AlertType.INFORMATION);
-        super.setTitle("Information Dialog");
+        super.setTitle(Constants.Labels.INFORMATION_DIALOG);
         super.setHeaderText(null);
         super.setHeaderText(title);
         super.setContentText(information);
-
         super.showAndWait();
     }
 

@@ -8,13 +8,13 @@ import com.mtanevski.math2d.gui.dialogs.NewObjectDialog;
 import javafx.application.Platform;
 import javafx.scene.layout.VBox;
 
+import static com.mtanevski.math2d.gui.utils.FxUtil.switchNode;
+
 public class CreateVectorCommand implements Command {
-    private final MainController controller;
     private DrawableVector drawableVector;
     private CreateRequest createRequest;
 
-    public CreateVectorCommand(MainController mainController, CreateRequest createRequest) {
-        this.controller = mainController;
+    public CreateVectorCommand(CreateRequest createRequest) {
         this.createRequest = createRequest;
     }
 
@@ -25,14 +25,14 @@ public class CreateVectorCommand implements Command {
             if(this.createRequest == null) {
                 var result = NewObjectDialog.showNewVector2DDialog(Constants.Labels.NEW_VECTOR_LABEL);
                 createRequest = CreateRequest.fromDialogResult(result);
-                drawableVector = new DrawableVector(result.label, result.x, result.y, this.controller);
+                drawableVector = new DrawableVector(result.label, result.x, result.y);
             } else {
-                drawableVector = new DrawableVector(createRequest.getName(), createRequest.getX(), createRequest.getY(), this.controller);
+                drawableVector = new DrawableVector(createRequest.getName(), createRequest.getX(), createRequest.getY());
             }
             Overlay.drawVector(drawableVector);
-            VBox editPropertiesPane = drawableVector.getEditPropertiesPane();
-            drawableVector.onDrag(() -> this.controller.switchPropertiesPane(editPropertiesPane));
-            this.controller.switchPropertiesPane(editPropertiesPane);
+            var editPropertiesPane = drawableVector.getEditPropertiesPane();
+            drawableVector.onDrag(() -> switchNode(Overlay.getScene(), editPropertiesPane, Constants.Ids.PROPERTIES_PANE));
+            switchNode(Overlay.getScene(), editPropertiesPane, Constants.Ids.PROPERTIES_PANE);
         });
     }
 

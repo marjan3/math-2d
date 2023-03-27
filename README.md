@@ -35,13 +35,13 @@ This section will describe requirements needed to satisfy the installation or ru
 
 ## Future changes
 
-- expand the accordions
-- Improve about section with: why I built this tool and how I use it
-- Implement other math operations
+- label position of point 2d is too close to point 2D
+- undo/Redo is a bit clunky
+- can't drop a vector or point into the first quarter
+- implement other math operations
 - improve code, separation of concerns, single responsibility, reduce duplication, maybe event buss
-- move and delete commands cant be undo
-- Improve GUI interaction
-- Write unit tests
+- always expand Inspect accordions
+- write unit tests
  
 ## Contact
 

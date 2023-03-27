@@ -6,19 +6,25 @@ public interface Constants {
 
     String POINT = "Point";
     String VECTOR = "Vector";
-    String[] OBJECTS = { "Vector", "Point" };
+    String[] OBJECTS = { POINT, VECTOR };
 
     interface Radius {
         double INVISIBLE = 10.0;
         double POINT = 3.0;
     }
 
+    interface Ids {
+        String OVERLAY = "overlay";
+        String PROPERTIES_PANE = "#propertiesPane";
+    }
+
     interface Resources {
         String ABOUT_FXML = "about.fxml";
         String INDEX_FXML = "index.fxml";
-        String COORDINATESYSTEM_PROPERTIES_FXML = "/coordinatesystem/properties.fxml";
         String POINT_2D_PROPERTIES_FXML = "/point2d/properties.fxml";
         String VECTOR_2D_PROPERTIES_FXML = "/vector2d/properties.fxml";
+        String SMALL_CIRCLE_PNG = "small-circle.png";
+        String ARROW_DOWN_RIGHT_PNG = "arrow-down-right.png";
     }
 
     interface Labels {
@@ -36,6 +42,7 @@ public interface Constants {
         String LEFT = "Left";
         String RIGHT = "Right";
         String OK = "OK";
+        String INFORMATION_DIALOG = "Information Dialog";
     }
 
     interface Canvas {
@@ -61,7 +68,7 @@ public interface Constants {
         Color TRANSPARENT = new Color(0.0D, 0.0D, 1.0D, 0.0D);
     }
 
-    enum OriginType {
+    enum Origin {
         CENTER,
         DEFAULT,
     }

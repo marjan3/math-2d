@@ -1,6 +1,10 @@
 package com.mtanevski.math2d.gui.canvas.point;
 
 import com.mtanevski.math2d.gui.Constants;
+import com.mtanevski.math2d.gui.canvas.Overlay;
+import com.mtanevski.math2d.gui.commands.CommandsManager;
+import com.mtanevski.math2d.gui.commands.DeletePointCommand;
+import com.mtanevski.math2d.gui.commands.MovePointCommand;
 import com.mtanevski.math2d.math.Point2D;
 
 import javafx.beans.property.ObjectProperty;
@@ -13,7 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
@@ -21,16 +25,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DrawablePoint {
-    private Circle circle;
-    private Circle invisibleCircle;
+    private final Circle circle;
+    private final Circle invisibleCircle;
     private final ObjectProperty<Point2D> point2DProperty;
     public final Text label;
     private final ContextMenu contextMenu;
-    private final MenuItem deleteItem;
-    private GridPane editablePropertiesPane;
+    private VBox editablePropertiesPane;
+    private Point2D previousLocation;
 
     public DrawablePoint(String name, double x, double y) {
         circle = new Circle();
+        previousLocation = Point2D.of(x, y);
+
         circle.setFill(Constants.Colors.OBJECT);
         circle.setStroke(Constants.Colors.OBJECT);
         circle.setStrokeWidth(Constants.Widths.OBJECT);
@@ -43,9 +49,9 @@ public class DrawablePoint {
         label = new Text(name);
 
         point2DProperty = new SimpleObjectProperty<>(new Point2D(x, y));
-        point2DProperty.addListener((observableValue, number, t1) -> this.updateGraphicsPositions());
+        point2DProperty.addListener((observableValue, number, t1) -> this.move(this.point2DProperty.get()));
 
-        this.updateGraphicsPositions();
+        this.move(this.point2DProperty.get());
 
         EventHandler<MouseEvent> mouseDragged = t -> {
             circle.setStroke(Constants.Colors.SELECTABLE);
@@ -54,7 +60,11 @@ public class DrawablePoint {
         };
 
         EventHandler<MouseEvent> mouseClicked = t -> {
+            Overlay.deselectAll();
             circle.setStroke(Constants.Colors.SELECTABLE);
+            CommandsManager.execute(new MovePointCommand(this, previousLocation, point2DProperty.get()));
+            Point2D point2D = point2DProperty.get();
+            previousLocation = point2D.clone();
             t.consume();
         };
 
@@ -71,10 +81,10 @@ public class DrawablePoint {
         initializeEditPropertiesPane();
 
         contextMenu = new ContextMenu();
-        deleteItem = new MenuItem(Constants.Labels.DELETE);
+        MenuItem deleteItem = new MenuItem(Constants.Labels.DELETE);
         deleteItem.setOnAction(e -> {
-            var parent = (Pane)circle.getParent();
-            parent.getChildren().removeAll(this.getChildren());
+            this.editablePropertiesPane.setVisible(false);
+            CommandsManager.execute(new DeletePointCommand(this));
         });
         contextMenu.getItems().add(deleteItem);
         EventHandler<ContextMenuEvent> contextMenuEventEventHandler = e -> {
@@ -87,8 +97,8 @@ public class DrawablePoint {
         circle.setStroke(Constants.Colors.SELECTABLE);
     }
 
-    private void updateGraphicsPositions() {
-        var point2D = point2DProperty.get();
+    public void move(Point2D point2D) {
+        point2DProperty.set(point2D);
         circle.setCenterX(point2D.x);
         circle.setCenterY(point2D.y);
         invisibleCircle.setCenterX(point2D.x);
@@ -105,27 +115,39 @@ public class DrawablePoint {
         return nodes;
     }
 
-    public GridPane getEditPropertiesPane() {
+    public VBox getEditPropertiesPane() {
         return editablePropertiesPane;
     }
 
     private void initializeEditPropertiesPane() {
-        var drawablePointProperties = new PointProperties(point2DProperty);
+        var drawablePointProperties = new PointProperties(point2DProperty, label.textProperty());
         editablePropertiesPane = drawablePointProperties.getPane();
     }
 
-    public void onDrag(Runnable runnable) {
+    public void onDrag(Runnable switchPropertiesPane) {
         var onMouseDragged1 = circle.getOnMouseDragged();
         circle.setOnMouseDragged(t -> {
             onMouseDragged1.handle(t);
-            runnable.run();
+            switchPropertiesPane.run();
+            t.consume();
+        });
+        var onMouseClicked1 = circle.getOnMouseClicked();
+        circle.setOnMouseClicked(t -> {
+            onMouseClicked1.handle(t);
+            switchPropertiesPane.run();
             t.consume();
         });
 
         var onMouseDragged2 = invisibleCircle.getOnMouseDragged();
-        circle.setOnMouseDragged(t -> {
+        invisibleCircle.setOnMouseDragged(t -> {
             onMouseDragged2.handle(t);
-            runnable.run();
+            switchPropertiesPane.run();
+            t.consume();
+        });
+        var onMouseClicked = invisibleCircle.getOnMouseClicked();
+        invisibleCircle.setOnMouseClicked(t -> {
+            onMouseClicked.handle(t);
+            switchPropertiesPane.run();
             t.consume();
         });
     }

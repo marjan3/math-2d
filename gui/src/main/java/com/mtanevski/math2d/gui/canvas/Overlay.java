@@ -4,6 +4,7 @@ import com.mtanevski.math2d.gui.Constants;
 import com.mtanevski.math2d.gui.canvas.point.DrawablePoint;
 import com.mtanevski.math2d.gui.canvas.vector.DrawableVector;
 import com.mtanevski.math2d.math.Point2D;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -51,8 +52,8 @@ public class Overlay {
         });
     }
 
-    public static void setOrigin(Constants.OriginType originType, double width, double height) {
-        if (originType == Constants.OriginType.CENTER) {
+    public static void setOrigin(Constants.Origin origin, double width, double height) {
+        if (origin == Constants.Origin.CENTER) {
             pane.getTransforms().clear();
             translate = new Translate(width / 2, height / 2);
             pane.getTransforms().add(translate);
@@ -98,7 +99,7 @@ public class Overlay {
 
     public static void deselectAll() {
         Stream.of(pane.getChildren()).forEach(n -> {
-            n.stream().forEach( node -> {
+            n.forEach(node -> {
             if(node instanceof Polyline polyline) {
                 polyline.setStroke(Constants.Colors.OBJECT);
             } else if(node instanceof Circle circle) {
@@ -127,5 +128,9 @@ public class Overlay {
         points.remove(drawablePoint.label.getText());
         pane.getChildren().removeAll(drawablePoint.getChildren());
     }
+    public static Scene getScene() {
+        return pane.getScene();
+    }
+
 
 }

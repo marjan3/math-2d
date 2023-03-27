@@ -8,14 +8,14 @@ import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Affine;
 
-public class Kanvas {
+public class CanvasWrapper {
 
     public static final String ID = "canvas";
     private final Canvas canvas;
     private Point2D selectionStart;
     private Point2D selectionEnd;
 
-    public Kanvas(Canvas canvas) {
+    public CanvasWrapper(Canvas canvas) {
 
         this.canvas = canvas;
         this.canvas.setId(ID);
@@ -53,9 +53,9 @@ public class Kanvas {
         event.consume();
     }
 
-    public void drawWithOrigin(Constants.OriginType originType) {
+    public void draw(Constants.Origin origin) {
         this.clear();
-        Overlay.setOrigin(originType, canvas.getWidth(), canvas.getHeight());
+        Overlay.setOrigin(origin, canvas.getWidth(), canvas.getHeight());
     }
 
     private void clear() {
@@ -66,8 +66,8 @@ public class Kanvas {
     }
 
     private void proxyDragEvents() {
-        canvas.setOnDragOver(Kanvas::handleOnDrag);
-        Overlay.pane.setOnDragOver(Kanvas::handleOnDrag);
+        canvas.setOnDragOver(CanvasWrapper::handleOnDrag);
+        Overlay.pane.setOnDragOver(CanvasWrapper::handleOnDrag);
 
         canvas.setOnMousePressed((MouseEvent event) -> {
                 this.selectionStart = Point2D.of(event.getX(), event.getY());

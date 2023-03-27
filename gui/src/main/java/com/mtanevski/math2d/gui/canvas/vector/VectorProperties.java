@@ -21,7 +21,7 @@ import java.io.IOException;
 public class VectorProperties {
 
     @FXML
-    public Label titleLabel;
+    public Label nameLabel;
     @FXML
     public TextField xField;
     @FXML
@@ -53,11 +53,13 @@ public class VectorProperties {
     @FXML
     public TextField rotationAngleField;
 
-    private VBox root;
+    private final VBox root;
+    private final ObjectProperty<Vector2D> vector2DProperty;
+    private final StringProperty nameProperty;
 
-    public VectorProperties(ObjectProperty<Vector2D> vector2DProperty, StringProperty titleProperty) {
+    public VectorProperties(ObjectProperty<Vector2D> vector2DProperty, StringProperty nameProperty) {
         this.vector2DProperty = vector2DProperty;
-        this.titleProperty = titleProperty;
+        this.nameProperty = nameProperty;
         try {
             var resource = VectorProperties.class.getResource(Constants.Resources.VECTOR_2D_PROPERTIES_FXML);
 
@@ -73,13 +75,10 @@ public class VectorProperties {
         this.vector2DProperty.set(vector2D);
     }
 
-    private ObjectProperty<Vector2D> vector2DProperty;
-    private StringProperty titleProperty;
-
     @FXML
     public void initialize() {
         // title
-        Bindings.bindBidirectional(titleLabel.textProperty(), titleProperty);
+        Bindings.bindBidirectional(nameLabel.textProperty(), nameProperty);
         // x
         xField.setText(String.valueOf(vector2DProperty.get().x));
         xField.setTextFormatter(TextFormatters.newDoubleFormatter());

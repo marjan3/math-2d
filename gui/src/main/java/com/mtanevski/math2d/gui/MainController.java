@@ -1,28 +1,23 @@
 package com.mtanevski.math2d.gui;
 
-import com.mtanevski.math2d.gui.canvas.Kanvas;
+import com.mtanevski.math2d.gui.canvas.CanvasWrapper;
 import com.mtanevski.math2d.gui.canvas.Overlay;
-import com.mtanevski.math2d.gui.canvas.coordinatesystem.CoordinateSystem;
 import com.mtanevski.math2d.gui.commands.CommandsManager;
 import com.mtanevski.math2d.gui.commands.CreatePointCommand;
 import com.mtanevski.math2d.gui.commands.CreateVectorCommand;
+import com.mtanevski.math2d.gui.utils.CoordinateSystem;
 import com.mtanevski.math2d.gui.utils.FxUtil;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 public class MainController extends VBox {
-
-    private CoordinateSystem coordinateSystem;
 
     @FXML
     private Canvas canvas;
@@ -36,43 +31,67 @@ public class MainController extends VBox {
     private MenuItem undoMenuItem;
     @FXML
     private MenuItem redoMenuItem;
-    private Kanvas kanvas;
+    @FXML
+    public ChoiceBox<Constants.Origin> originChoiceBox;
+
+    private CanvasWrapper canvasWrapper;
 
     public void initialize() {
-        initializeKanvas();
-        // initialize coordinate system
-        this.coordinateSystem = new CoordinateSystem(canvas, this::draw);
 
+        // initialize choicebox
+        originChoiceBox.getItems().addAll(Constants.Origin.values());
+        originChoiceBox.getSelectionModel().select(Constants.Origin.CENTER);
+        var origin = getSelectedOrigin();
+
+        // canvas wrapper
+        canvasWrapper = new CanvasWrapper(canvas);
+        canvasWrapper.setOnMouseEnteredOrMoved(this::updateMousePositions);
+        canvasWrapper.setOnMouseClicked(event -> {
+            this.updateMousePositions(event);
+            Overlay.deselectAll();
+        });
+        canvasWrapper.setOnDragDropped(getDragDroppedHandler());
+        this.canvasWrapper.draw(origin);
+
+        // objects
         initializeObjectsList();
-        this.draw();
-        undoMenuItem.disableProperty().bind(CommandsManager.canUndoProperty);
-        redoMenuItem.disableProperty().bind(CommandsManager.canRedoProperty);
+
+        // coordinate
+        CoordinateSystem.draw(canvas, origin);
+        CommandsManager.canUndoProperty.addListener((observableValue, oldValue, newValue) -> undoMenuItem.setDisable(!newValue));
+        CommandsManager.canRedoProperty.addListener((observableValue, oldValue, newValue) -> redoMenuItem.setDisable(!newValue));
     }
 
-    public void exit(){
+    public void newPoint() {
+        CommandsManager.execute(new CreatePointCommand(null));
+    }
+
+    public void newVector() {
+        CommandsManager.execute(new CreateVectorCommand(null));
+    }
+
+    public void exit() {
         Platform.exit();
     }
 
-    public void about(){
+    public void about() {
         FxUtil.loadUtilWindow(Constants.Resources.ABOUT_FXML, null, canvas.getScene().getWindow());
     }
-    public void undo(){
+
+    public void undo() {
         CommandsManager.undo();
     }
 
-    public void redo(){
+    public void redo() {
         CommandsManager.redo();
     }
 
-    private void initializeKanvas() {
-        kanvas = new Kanvas(canvas);
-        kanvas.setOnMouseEnteredOrMoved(this::updateMousePositions);
-        kanvas.setOnMouseClicked(event -> {
-            this.updateMousePositions(event);
-            this.switchPropertiesPane(coordinateSystem.getEditPropertiesPane());
-            Overlay.deselectAll();
-        });
-        kanvas.setOnDragDropped(getDragDroppedHandler());
+    public void originChange() {
+        var selectedOrigin = getSelectedOrigin();
+        if(canvasWrapper!= null) {
+            this.canvasWrapper.draw(selectedOrigin);
+        CoordinateSystem.draw(canvas, selectedOrigin);
+        }
     }
 
     private EventHandler<DragEvent> getDragDroppedHandler() {
@@ -83,9 +102,9 @@ public class MainController extends VBox {
             if (db.hasString()) {
                 String draggedItem = db.getString();
                 if (Constants.VECTOR.equals(draggedItem)) {
-                    CommandsManager.execute(new CreateVectorCommand(this, null));
+                    CommandsManager.execute(new CreateVectorCommand(null));
                 } else if (Constants.POINT.equals(draggedItem)) {
-                    CommandsManager.execute(new CreatePointCommand(this, null));
+                    CommandsManager.execute(new CreatePointCommand(null));
                 }
 
                 success = true;
@@ -98,13 +117,27 @@ public class MainController extends VBox {
     private void initializeObjectsList() {
         objectsList.getItems().addAll(Constants.OBJECTS);
         objectsList.setCellFactory(new Callback<>() {
+            private final ImageView imageView1 = new ImageView();
+            private final ImageView imageView2 = new ImageView();
             @Override
             public ListCell<String> call(ListView<String> param) {
                 ListCell<String> listCell = new ListCell<>() {
                     @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        setText(item);
+                    protected void updateItem(String name, boolean empty) {
+                        super.updateItem(name, empty);
+                        if (empty) {
+                            setText(null);
+                            setGraphic(null);
+                        } else {
+                            if (name.equals(Constants.POINT)) {
+                                imageView1.setImage(FxUtil.createImage(imageView1, Constants.Resources.SMALL_CIRCLE_PNG));
+                                setGraphic(imageView1);
+                            } else if (name.equals(Constants.VECTOR)) {
+                                imageView2.setImage(FxUtil.createImage(imageView2, Constants.Resources.ARROW_DOWN_RIGHT_PNG));
+                                setGraphic(imageView2);
+                            }
+                            setText(name);
+                        }
                     }
                 };
 
@@ -122,27 +155,30 @@ public class MainController extends VBox {
         });
     }
 
-    public void switchPropertiesPane(Node editPropertiesPane) {
-        propertiesPane.getChildren().clear();
-        propertiesPane.getChildren().addAll(editPropertiesPane);
-    }
-
     private void updateMousePositions(MouseEvent mouseEvent) {
         var pickResult = mouseEvent.getPickResult();
         double x = pickResult.getIntersectedPoint().getX();
         double y = pickResult.getIntersectedPoint().getY();
         var intersectedNode = pickResult.getIntersectedNode();
-        boolean isCanvasIntersected = intersectedNode instanceof Canvas || "overlay".equals(intersectedNode.getId());
-        if (isCanvasIntersected && this.coordinateSystem.isOriginCenter()) {
+        boolean isCanvasIntersected = intersectedNode instanceof Canvas
+                || Constants.Ids.OVERLAY.equals(intersectedNode.getId());
+        if (isCanvasIntersected && isOriginCenter()) {
             x = (x - canvas.getWidth() / 2);
             y = (y - canvas.getHeight() / 2);
         }
-        this.mouseCoordinates.setText(String.format("%d,%d", (int)x, (int)y));
+        if(isCanvasIntersected && mouseEvent.getClickCount() > 0) {
+            propertiesPane.getChildren().clear();
+        }
+        this.mouseCoordinates.setText(String.format("%d,%d", (int) x, (int) y));
     }
 
-    private void draw() {
-        Constants.OriginType selectedItem = this.coordinateSystem.getOriginType();
-        this.kanvas.drawWithOrigin(selectedItem);
-        this.coordinateSystem.draw();
+    private boolean isOriginCenter() {
+        return originChoiceBox.getSelectionModel().getSelectedItem() == Constants.Origin.CENTER;
     }
+
+    private Constants.Origin getSelectedOrigin() {
+        return originChoiceBox.getSelectionModel().getSelectedItem();
+    }
+
+
 }

@@ -1,7 +1,9 @@
-package com.mtanevski.math2d.gui.canvas;
+package com.mtanevski.math2d.gui.utils;
 
 import com.mtanevski.math2d.math.Vector2D;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class Calculator {
 
     public static Double[] getArrow(double x, double y) {

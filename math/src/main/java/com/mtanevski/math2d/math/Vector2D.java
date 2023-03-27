@@ -26,6 +26,124 @@ public class Vector2D implements Cloneable {
         return new Vector2D(x, y);
     }
 
+    /**
+     * If we assume a & b are unit vector the dot product can be calculated using the following method.
+     * If not, the result will be multiplied by the lengths of the vectors
+     * - If the dot product is positive, vector a is pointing in the same general direction as vector b
+     * - If the dot product is negative, vector a is pointing in the opposite general direction of vector b
+     * - If the dot product is equal to zero, vector a & b are perpendicular
+     * - The dot product for vectors a & b where a is equal to be will be the squared length of the vector a or b
+     * - The square root of the dot product of the same vector will result in the length of the vector
+     * - The dot product of the vector a and a unit vector b results in a distance from the end of vector a to the line defined by the perpendicular unit vector of b
+     * - The dot product of the vector a and a unit vector b results in the distance from the end of vector a to the line defined by the unit vector b
+     *
+     * @param a vector 1
+     * @param b vector 2
+     * @return the calculated dot product
+     */
+    public static double getDotProduct(Vector2D a, Vector2D b) {
+        return a.x * b.x + a.y * b.y;
+    }
+
+    /**
+     * Subtracts two vectors
+     *
+     * @param a vector one
+     * @param b vector 2
+     * @return resulting vector
+     */
+    public static Vector2D subtract(Vector2D a, Vector2D b) {
+        return new Vector2D(a.x - b.x, a.y - b.y);
+    }
+
+    /**
+     * Adds two vectors
+     *
+     * @param a vector one
+     * @param b vector 2
+     * @return resulting vector
+     */
+    public static Vector2D add(Vector2D a, Vector2D b) {
+        return new Vector2D(a.x + b.x, a.y + b.y);
+    }
+
+    /**
+     * TODOVISUALLY
+     * Get projection point based on the projection time
+     *
+     * @param p the point on which the projection is based
+     * @param b the vector to project
+     * @param t the projection time {@link Vector2D#getProjectionTime(Vector2D, Vector2D)}
+     * @return the point of the projected vector
+     */
+    public static Point2D getProjectionPoint(Point2D p, Vector2D b, double t) {
+        return new Point2D(p.x + t * b.x, p.y + t * b.y);
+    }
+
+    /**
+     * The projection time is useful to determine if the projection point is behind, on or ahead of the vector b.
+     * - If the projection time is less than zero, then the projection point will be behind the vector b.
+     * - If the projection time is greater than one, then the projection point will be ahead of the vector b.
+     * - Otherwise, the projection point will be on vector b
+     *
+     * @param a projection to vector
+     * @param b the projected vector
+     * @return the projection time (simplified when b is a unit vector
+     */
+    public static double getProjectionTime(Vector2D a, Vector2D b) {
+        return (a.x * a.x + a.y * a.y) / (b.x * b.x + b.y * b.y);
+    }
+
+    /**
+     * TODOVISUALLY
+     * Creates a vector from an angle based on trigonometry functions
+     *
+     * @param a the angle in radians
+     * @return the resulting vector
+     */
+    public static Vector2D getVector(double a) {
+        return new Vector2D(Math.cos(a), Math.sin(a));
+    }
+
+    /**
+     * Returns the angle between two vectors
+     *
+     * @param a vector 1
+     * @param b vector 2
+     * @return the angle in radians
+     */
+    public static double getAngle(Vector2D a, Vector2D b) {
+        double lv = a.getLength();
+        double lx = b.getLength();
+        return Math.acos((a.x * b.x + a.y * b.y) / (lv * lx));
+    }
+
+    /**
+     * Calculates the perpendicular product of two vectors
+     * - If the perpendicular product is positive, then the vector b is pointing left of the vector a
+     * - If the perpendicular product is equal to zero, then the vector b is parallel to the vector a
+     * - If the perpendicular product is negative, then the vector b is pointing right of the vector a
+     * - The perpendicular product of the vector a (a unit vector), results in the distance (d) from the end of vector a to the line defined by the unit vector b.
+     *
+     * @param a vector 1
+     * @param b vector 2
+     * @return the calculated perpendicular product
+     */
+    public static double getPerpendicularProduct(Vector2D a, Vector2D b) {
+        return a.x * b.y - a.y * b.x;
+    }
+
+    /**
+     * Divides a vector by a given scalar value
+     *
+     * @param vector2D the vector to divide
+     * @param scalar   the value that the vector will be divided by
+     * @return the new divided vector
+     */
+    public static Vector2D divide(Vector2D vector2D, double scalar) {
+        return new Vector2D(vector2D.x / scalar, vector2D.y / scalar);
+    }
+
 
     /**
      * Also known as magnitude which can represent any quantity: length, distance, movement, displacement, velocity, force, etc.
@@ -66,11 +184,6 @@ public class Vector2D implements Cloneable {
         return this;
     }
 
-    public void round() {
-        x = Math.floor(x);
-        y = Math.floor(y);
-    }
-
     /**
      * TODO
      * @param reductionLength
@@ -95,17 +208,6 @@ public class Vector2D implements Cloneable {
     }
 
     /**
-     * Adds two vectors
-     *
-     * @param a vector one
-     * @param b vector 2
-     * @return resulting vector
-     */
-    public static Vector2D add(Vector2D a, Vector2D b) {
-        return new Vector2D(a.x + b.x, a.y + b.y);
-    }
-
-    /**
      * Adds the given vector with this one
      *
      * @param vector2D the vector to add
@@ -125,17 +227,6 @@ public class Vector2D implements Cloneable {
     public void add(double x, double y) {
         this.x += x;
         this.y += y;
-    }
-
-    /**
-     * Subtracts two vectors
-     *
-     * @param a vector one
-     * @param b vector 2
-     * @return resulting vector
-     */
-    public static Vector2D subtract(Vector2D a, Vector2D b) {
-        return new Vector2D(a.x - b.x, a.y - b.y);
     }
 
     /**
@@ -199,17 +290,6 @@ public class Vector2D implements Cloneable {
     }
 
     /**
-     * Divides a vector by a given scalar value
-     *
-     * @param vector2D the vector to divide
-     * @param scalar   the value that the vector will be divided by
-     * @return the new divided vector
-     */
-    public static Vector2D divide(Vector2D vector2D, double scalar) {
-        return new Vector2D(vector2D.x / scalar, vector2D.y / scalar);
-    }
-
-    /**
      * Divides this vector
      *
      * @param scalar the value this vector will be divided by
@@ -218,40 +298,6 @@ public class Vector2D implements Cloneable {
         x /= scalar;
         y /= scalar;
         return this;
-    }
-
-    /**
-     * If we assume a & b are unit vector the dot product can be calculated using the following method.
-     * If not, the result will be multiplied by the lengths of the vectors
-     * - If the dot product is positive, vector a is pointing in the same general direction as vector b
-     * - If the dot product is negative, vector a is pointing in the opposite general direction of vector b
-     * - If the dot product is equal to zero, vector a & b are perpendicular
-     * - The dot product for vectors a & b where a is equal to be will be the squared length of the vector a or b
-     * - The square root of the dot product of the same vector will result in the length of the vector
-     * - The dot product of the vector a and a unit vector b results in a distance from the end of vector a to the line defined by the perpendicular unit vector of b
-     * - The dot product of the vector a and a unit vector b results in the distance from the end of vector a to the line defined by the unit vector b
-     *
-     * @param a vector 1
-     * @param b vector 2
-     * @return the calculated dot product
-     */
-    public static double getDotProduct(Vector2D a, Vector2D b) {
-        return a.x * b.x + a.y * b.y;
-    }
-
-    /**
-     * Calculates the perpendicular product of two vectors
-     * - If the perpendicular product is positive, then the vector b is pointing left of the vector a
-     * - If the perpendicular product is equal to zero, then the vector b is parallel to the vector a
-     * - If the perpendicular product is negative, then the vector b is pointing right of the vector a
-     * - The perpendicular product of the vector a (a unit vector), results in the distance (d) from the end of vector a to the line defined by the unit vector b.
-     *
-     * @param a vector 1
-     * @param b vector 2
-     * @return the calculated perpendicular product
-     */
-    public static double getPerpendicularProduct(Vector2D a, Vector2D b) {
-        return a.x * b.y - a.y * b.x;
     }
 
     /**
@@ -264,32 +310,6 @@ public class Vector2D implements Cloneable {
         return a.y * x - a.x * y;
     }
 
-    /**
-     * The projection time is useful to determine if the projection point is behind, on or ahead of the vector b.
-     * - If the projection time is less than zero, then the projection point will be behind the vector b.
-     * - If the projection time is greater than one, then the projection point will be ahead of the vector b.
-     * - Otherwise, the projection point will be on vector b
-     *
-     * @param a projection to vector
-     * @param b the projected vector
-     * @return the projection time (simplified when b is a unit vector
-     */
-    public static double getProjectionTime(Vector2D a, Vector2D b) {
-        return (a.x * a.x + a.y * a.y) / (b.x * b.x + b.y * b.y);
-    }
-
-    /**
-     * TODOVISUALLY
-     * Get projection point based on the projection time
-     *
-     * @param p the point on which the projection is based
-     * @param b the vector to project
-     * @param t the projection time {@link Vector2D#getProjectionTime(Vector2D, Vector2D)}
-     * @return the point of the projected vector
-     */
-    public static Point2D getProjectionPoint(Point2D p, Vector2D b, double t) {
-        return new Point2D(p.x + t * b.x, p.y + t * b.y);
-    }
 
     /**
      * TODOVISUALLY
@@ -317,17 +337,6 @@ public class Vector2D implements Cloneable {
         return y / x;
     }
 
-    /**
-     * TODOVISUALLY
-     * Creates a vector from an angle based on trigonometry functions
-     *
-     * @param a the angle in radians
-     * @return the resulting vector
-     */
-    public static Vector2D getVector(double a) {
-        return new Vector2D(Math.cos(a), Math.sin(a));
-    }
-
 
     /**
      * Calculates the angle of the vector
@@ -347,20 +356,7 @@ public class Vector2D implements Cloneable {
      * @return the angle in radians
      */
     public double getAngle(Vector2D a) {
-        return Vector2D.getAngle(this, a);
-    }
-
-    /**
-     * Returns the angle between two vectors
-     *
-     * @param a vector 1
-     * @param b vector 2
-     * @return the angle in radians
-     */
-    public static double getAngle(Vector2D a, Vector2D b) {
-        double lv = a.getLength();
-        double lx = b.getLength();
-        return Math.acos((a.x * b.x + a.y * b.y) / (lv * lx));
+        return getAngle(this, a);
     }
 
 

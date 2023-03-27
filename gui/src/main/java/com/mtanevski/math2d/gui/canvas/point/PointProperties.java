@@ -6,10 +6,12 @@ import com.mtanevski.math2d.gui.utils.TextFormatters;
 import com.mtanevski.math2d.math.Point2D;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
 import java.io.IOException;
@@ -19,30 +21,32 @@ public class PointProperties {
     public TextField xField;
     @FXML
     public TextField yField;
+    @FXML
+    public Label nameLabel;
 
-    private GridPane gridPane;
+    private final VBox pane;
     private final ObjectProperty<Point2D> point2DProperty;
+    private final StringProperty nameProperty;
 
-    public PointProperties(ObjectProperty<Point2D> point2DProperty) {
+    public PointProperties(ObjectProperty<Point2D> point2DProperty, StringProperty nameProperty) {
         this.point2DProperty = point2DProperty;
+        this.nameProperty = nameProperty;
         try {
             var resource = PointProperties.class.getResource(Constants.Resources.POINT_2D_PROPERTIES_FXML);
 
             var loader = new FXMLLoader(resource);
             loader.setLocation(resource);
             loader.setController(this);
-            gridPane = loader.load();
+            pane = loader.load();
         } catch (IOException exc) {
             throw new RuntimeException(exc);
         }
     }
 
-    public void setProperty(Point2D point2D) {
-        this.point2DProperty.set(point2D);
-    }
-
     @FXML
     public void initialize() {
+        // title
+        Bindings.bindBidirectional(nameLabel.textProperty(), nameProperty);
         // x
         xField.setText(String.valueOf(point2DProperty.get().x));
         xField.setTextFormatter(TextFormatters.newDoubleFormatter());
@@ -76,7 +80,7 @@ public class PointProperties {
         });
     }
 
-    public GridPane getPane() {
-        return gridPane;
+    public VBox getPane() {
+        return pane;
     }
 }
