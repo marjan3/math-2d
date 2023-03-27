@@ -2,11 +2,15 @@ package com.mtanevski.math2d.gui.canvas;
 
 import com.mtanevski.math2d.gui.Constants;
 import com.mtanevski.math2d.math.Point2D;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Affine;
+
+import static com.mtanevski.math2d.gui.utils.FxUtil.debug;
 
 public class CanvasWrapper {
 
@@ -22,7 +26,8 @@ public class CanvasWrapper {
 
         //  add overlay to canvas
         Overlay.buildPane();
-        ((AnchorPane) this.canvas.getParent()).getChildren().add(Overlay.pane);
+        var children = ((AnchorPane) this.canvas.getParent()).getChildren();
+        children.add(Overlay.pane);
 
         this.proxyDragEvents();
     }
@@ -31,7 +36,6 @@ public class CanvasWrapper {
         canvas.setOnDragDropped(value);
         Overlay.pane.setOnDragDropped(value);
     }
-
 
     public void setOnMouseEnteredOrMoved(EventHandler<? super MouseEvent> value){
         canvas.setOnMouseEntered(value);
@@ -45,10 +49,10 @@ public class CanvasWrapper {
         Overlay.pane.setOnMouseClicked(value);
     }
 
-    private static void handleOnDrag(DragEvent event) {
+    private static void handleOnDragOver(DragEvent event) {
         Dragboard db = event.getDragboard();
         if (db.hasString()) {
-            event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+            event.acceptTransferModes(TransferMode.COPY);
         }
         event.consume();
     }
@@ -66,8 +70,8 @@ public class CanvasWrapper {
     }
 
     private void proxyDragEvents() {
-        canvas.setOnDragOver(CanvasWrapper::handleOnDrag);
-        Overlay.pane.setOnDragOver(CanvasWrapper::handleOnDrag);
+        canvas.setOnDragOver(CanvasWrapper::handleOnDragOver);
+        Overlay.pane.setOnDragOver(CanvasWrapper::handleOnDragOver);
 
         canvas.setOnMousePressed((MouseEvent event) -> {
                 this.selectionStart = Point2D.of(event.getX(), event.getY());
@@ -79,16 +83,6 @@ public class CanvasWrapper {
         canvas.setOnMouseReleased((MouseEvent event) -> {
             Overlay.removeDragSquare();
         });
-
-        canvas.setOnDragDetected((MouseEvent event) ->
-        {
-            Dragboard db = canvas.startDragAndDrop(TransferMode.COPY_OR_MOVE);
-            ClipboardContent content = new ClipboardContent();
-//            content.putString( listCell.getItem() );
-            db.setContent(content);
-            event.consume();
-        });
-
     }
 
 

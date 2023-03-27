@@ -71,10 +71,6 @@ public class VectorProperties {
         }
     }
 
-    public void setVector2DProperty(Vector2D vector2D) {
-        this.vector2DProperty.set(vector2D);
-    }
-
     @FXML
     public void initialize() {
         // title

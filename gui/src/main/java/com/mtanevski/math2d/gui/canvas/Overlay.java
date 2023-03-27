@@ -62,7 +62,6 @@ public class Overlay {
             translate = new Translate(0, 0);
             pane.getTransforms().add(translate);
         }
-
     }
 
     public static void redrawDragSquare(Point2D startPoint, Point2D endPoint) {
@@ -74,11 +73,11 @@ public class Overlay {
         double height = endPoint.y - startPoint.y;
         double startPointX = startPoint.x;
         double startPointY = startPoint.y;
-        if(width < 0){
+        if (width < 0) {
             startPointX = startPointX + width;
             width = Math.abs(width);
         }
-        if(height < 0){
+        if (height < 0) {
             startPointY = startPointY + height;
             height = Math.abs(height);
         }
@@ -92,7 +91,7 @@ public class Overlay {
     }
 
     public static void removeDragSquare() {
-        if(selectionRectangle != null) {
+        if (selectionRectangle != null) {
             pane.getChildren().removeAll(selectionRectangle);
         }
     }
@@ -100,11 +99,11 @@ public class Overlay {
     public static void deselectAll() {
         Stream.of(pane.getChildren()).forEach(n -> {
             n.forEach(node -> {
-            if(node instanceof Polyline polyline) {
-                polyline.setStroke(Constants.Colors.OBJECT);
-            } else if(node instanceof Circle circle) {
-                circle.setStroke(Constants.Colors.OBJECT);
-            }
+                if (node instanceof Polyline polyline) {
+                    polyline.setStroke(Constants.Colors.OBJECT);
+                } else if (node instanceof Circle circle) {
+                    circle.setStroke(Constants.Colors.OBJECT);
+                }
             });
         });
     }
@@ -128,9 +127,9 @@ public class Overlay {
         points.remove(drawablePoint.label.getText());
         pane.getChildren().removeAll(drawablePoint.getChildren());
     }
+
     public static Scene getScene() {
         return pane.getScene();
     }
-
 
 }

@@ -8,9 +8,23 @@ public interface Constants {
     String VECTOR = "Vector";
     String[] OBJECTS = { POINT, VECTOR };
 
+    interface Formats {
+        String CANVAS_COORDINATES_FORMAT = "%d, %d";
+    }
+
+    interface Offsets {
+        int LABEL_OFFSET = 5;
+    }
+
     interface Radius {
         double INVISIBLE = 10.0;
         double POINT = 3.0;
+    }
+
+    interface Placeholders {
+        String DEFAULT_NAME = "A";
+        String DEFAULT_X = "100";
+        String DEFAULT_Y = "100";
     }
 
     interface Ids {
@@ -43,6 +57,9 @@ public interface Constants {
         String RIGHT = "Right";
         String OK = "OK";
         String INFORMATION_DIALOG = "Information Dialog";
+        String NAME = "Name";
+        String X = "X";
+        String Y = "Y";
     }
 
     interface Canvas {

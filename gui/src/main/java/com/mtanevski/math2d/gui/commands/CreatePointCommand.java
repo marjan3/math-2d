@@ -23,9 +23,15 @@ public class CreatePointCommand implements Command {
         Platform.runLater(() -> {
             Overlay.deselectAll();
             if (createRequest == null) {
-                var result = NewObjectDialog.showNewVector2DDialog(Constants.Labels.NEW_POINT_LABEL);
+                var result = NewObjectDialog.showXYDialog(Constants.Labels.NEW_POINT_LABEL);
                 createRequest = CreateRequest.fromDialogResult(result);
-                drawablePoint = new DrawablePoint(result.label, result.x, result.y);
+                drawablePoint = new DrawablePoint(createRequest.getName(), createRequest.getX(), createRequest.getY());
+            } else if (createRequest.getName() == null) {
+                var result =
+                        NewObjectDialog.showXYDialog(Constants.Labels.NEW_POINT_LABEL, null, createRequest.getX(),
+                                createRequest.getY());
+                createRequest = CreateRequest.fromDialogResult(result);
+                drawablePoint = new DrawablePoint(createRequest.getName(), createRequest.getX(), createRequest.getY());
             } else {
                 drawablePoint = new DrawablePoint(createRequest.getName(), createRequest.getX(), createRequest.getY());
             }

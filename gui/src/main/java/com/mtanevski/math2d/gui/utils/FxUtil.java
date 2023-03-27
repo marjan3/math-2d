@@ -51,4 +51,8 @@ public class FxUtil {
         Objects.requireNonNull(url);
         return new Image(url.toExternalForm());
     }
+
+    public static void debug(Node node) {
+        node.setStyle("-fx-background-color: red");
+    }
 }

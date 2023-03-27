@@ -1,6 +1,7 @@
 package com.mtanevski.math2d.gui.commands;
 
 import com.mtanevski.math2d.gui.dialogs.NewObjectDialogResult;
+import com.mtanevski.math2d.math.Point2D;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -20,4 +21,10 @@ public class CreateRequest {
                 build();
     }
 
+    public static CreateRequest from(Point2D point2D) {
+        return CreateRequest.builder()
+                .x(point2D.x)
+                .y(point2D.y)
+                .build();
+    }
 }

@@ -35,9 +35,7 @@ This section will describe requirements needed to satisfy the installation or ru
 
 ## Future changes
 
-- label position of point 2d is too close to point 2D
 - undo/Redo is a bit clunky
-- can't drop a vector or point into the first quarter
 - implement other math operations
 - improve code, separation of concerns, single responsibility, reduce duplication, maybe event buss
 - always expand Inspect accordions

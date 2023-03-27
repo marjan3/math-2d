@@ -93,7 +93,7 @@ public class DrawableVector {
             var vector2D = this.vector2DProperty.get();
             vector2D.add(vectorGraphic.vector2DProperty.get());
             var aPlusBLabel = "(" + this.label.getText() + ") + " + item.getText();
-            var newDialogResult = NewObjectDialog.showResultingVector2DDialog(aPlusBLabel, aPlusBLabel, vector2D);
+            var newDialogResult = NewObjectDialog.showXYDialog(aPlusBLabel, aPlusBLabel, vector2D.x , vector2D.y);
             CommandsManager.execute(new CreateVectorCommand(CreateRequest.fromDialogResult(newDialogResult)));
         });
         vectorContextMenu.setOnSubtract(e -> {
@@ -102,7 +102,7 @@ public class DrawableVector {
             var vector2D = this.vector2DProperty.get();
             vector2D.subtract(vectorGraphic.vector2DProperty.get());
             var aPlusBLabel = "(" + this.label.getText() + ") - " + item.getText();
-            var newDialogResult = NewObjectDialog.showResultingVector2DDialog(aPlusBLabel, aPlusBLabel, vector2D);
+            var newDialogResult = NewObjectDialog.showXYDialog(aPlusBLabel, aPlusBLabel, vector2D.x, vector2D.y);
             CommandsManager.execute(new CreateVectorCommand(CreateRequest.fromDialogResult(newDialogResult)));
         });
         vectorContextMenu.setOnPerpendicularVector(e -> {
@@ -118,13 +118,13 @@ public class DrawableVector {
                 result = source.getPerpendicularRight();
                 label = "Perpendicular right " + text;
             }
-            NewObjectDialogResult newDialogResult = NewObjectDialog.showResultingVector2DDialog(label, label, result);
+            var newDialogResult = NewObjectDialog.showXYDialog(label, label, result.x, result.y);
             CommandsManager.execute(new CreateVectorCommand(CreateRequest.fromDialogResult(newDialogResult)));
         });
         vectorContextMenu.setOnDotProduct(e -> {
-            MenuItem item = (MenuItem) e.getTarget();
-            DrawableVector drawableVector = Overlay.vectors.get(item.getText());
-            Vector2D vector2D = this.vector2DProperty.get();
+            var item = (MenuItem) e.getTarget();
+            var drawableVector = Overlay.vectors.get(item.getText());
+            var vector2D = this.vector2DProperty.get();
             double dotProduct = Vector2D.getDotProduct(vector2D, drawableVector.vector2DProperty.get());
             String aAndB = this.label.getText() + " and " + item.getText();
             InfoAlert.alert("Dot Product between " + aAndB, "Dot product is: " + dotProduct);
@@ -200,7 +200,7 @@ public class DrawableVector {
     }
 
     private void initializeEditPropertiesPane() {
-        VectorProperties vector2DProperties = new VectorProperties(vector2DProperty, label.textProperty());
+        var vector2DProperties = new VectorProperties(vector2DProperty, label.textProperty());
         editablePropertiesPane = vector2DProperties.getPane();
     }
 

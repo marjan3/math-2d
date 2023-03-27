@@ -4,11 +4,13 @@ import com.mtanevski.math2d.gui.canvas.CanvasWrapper;
 import com.mtanevski.math2d.gui.canvas.Overlay;
 import com.mtanevski.math2d.gui.commands.CommandsManager;
 import com.mtanevski.math2d.gui.commands.CreatePointCommand;
+import com.mtanevski.math2d.gui.commands.CreateRequest;
 import com.mtanevski.math2d.gui.commands.CreateVectorCommand;
 import com.mtanevski.math2d.gui.utils.CoordinateSystem;
 import com.mtanevski.math2d.gui.utils.FxUtil;
+import com.mtanevski.math2d.math.Point2D;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
@@ -45,12 +47,19 @@ public class MainController extends VBox {
 
         // canvas wrapper
         canvasWrapper = new CanvasWrapper(canvas);
-        canvasWrapper.setOnMouseEnteredOrMoved(this::updateMousePositions);
-        canvasWrapper.setOnMouseClicked(event -> {
-            this.updateMousePositions(event);
-            Overlay.deselectAll();
+        canvasWrapper.setOnMouseEnteredOrMoved((event) -> {
+            var coordinate = this.getCanvasCoordinate(event.getTarget(), event.getX(), event.getY());
+            String text = String.format(Constants.Formats.CANVAS_COORDINATES_FORMAT, (int) coordinate.x, (int) coordinate.y);
+            this.mouseCoordinates.setText(text);
         });
-        canvasWrapper.setOnDragDropped(getDragDroppedHandler());
+        canvasWrapper.setOnMouseClicked(event -> {
+            var coordinate = this.getCanvasCoordinate(event.getTarget(), event.getX(), event.getY());
+            String text = String.format(Constants.Formats.CANVAS_COORDINATES_FORMAT, (int) coordinate.x, (int) coordinate.y);
+            this.mouseCoordinates.setText(text);
+            Overlay.deselectAll();
+            propertiesPane.getChildren().clear();
+        });
+        canvasWrapper.setOnDragDropped(this::getDragDroppedHandler);
         this.canvasWrapper.draw(origin);
 
         // objects
@@ -88,30 +97,27 @@ public class MainController extends VBox {
 
     public void originChange() {
         var selectedOrigin = getSelectedOrigin();
-        if(canvasWrapper!= null) {
+        if (canvasWrapper != null) {
             this.canvasWrapper.draw(selectedOrigin);
-        CoordinateSystem.draw(canvas, selectedOrigin);
+            CoordinateSystem.draw(canvas, selectedOrigin);
         }
     }
 
-    private EventHandler<DragEvent> getDragDroppedHandler() {
-        return (DragEvent event) ->
-        {
-            var db = event.getDragboard();
-            boolean success = false;
-            if (db.hasString()) {
-                String draggedItem = db.getString();
-                if (Constants.VECTOR.equals(draggedItem)) {
-                    CommandsManager.execute(new CreateVectorCommand(null));
-                } else if (Constants.POINT.equals(draggedItem)) {
-                    CommandsManager.execute(new CreatePointCommand(null));
-                }
-
-                success = true;
+    private void getDragDroppedHandler(DragEvent event) {
+        var dragboard = event.getDragboard();
+        boolean success = false;
+        if (dragboard.hasString()) {
+            String draggedItem = dragboard.getString();
+            var createRequest = CreateRequest.from(getCanvasCoordinate(event.getTarget(), event.getX(), event.getY()));
+            if (Constants.VECTOR.equals(draggedItem)) {
+                CommandsManager.execute(new CreateVectorCommand(createRequest));
+            } else if (Constants.POINT.equals(draggedItem)) {
+                CommandsManager.execute(new CreatePointCommand(createRequest));
             }
-            event.setDropCompleted(success);
-            event.consume();
-        };
+            success = true;
+        }
+        event.setDropCompleted(success);
+        event.consume();
     }
 
     private void initializeObjectsList() {
@@ -119,6 +125,7 @@ public class MainController extends VBox {
         objectsList.setCellFactory(new Callback<>() {
             private final ImageView imageView1 = new ImageView();
             private final ImageView imageView2 = new ImageView();
+
             @Override
             public ListCell<String> call(ListView<String> param) {
                 ListCell<String> listCell = new ListCell<>() {
@@ -143,10 +150,10 @@ public class MainController extends VBox {
 
                 listCell.setOnDragDetected((MouseEvent event) ->
                 {
-                    Dragboard db = listCell.startDragAndDrop(TransferMode.COPY_OR_MOVE);
+                    Dragboard dragboard = listCell.startDragAndDrop(TransferMode.COPY);
                     ClipboardContent content = new ClipboardContent();
                     content.putString(listCell.getItem());
-                    db.setContent(content);
+                    dragboard.setContent(content);
                     event.consume();
                 });
 
@@ -155,21 +162,15 @@ public class MainController extends VBox {
         });
     }
 
-    private void updateMousePositions(MouseEvent mouseEvent) {
-        var pickResult = mouseEvent.getPickResult();
-        double x = pickResult.getIntersectedPoint().getX();
-        double y = pickResult.getIntersectedPoint().getY();
-        var intersectedNode = pickResult.getIntersectedNode();
-        boolean isCanvasIntersected = intersectedNode instanceof Canvas
-                || Constants.Ids.OVERLAY.equals(intersectedNode.getId());
+    private Point2D getCanvasCoordinate(EventTarget target, double x, double y) {
+        boolean isCanvasIntersected = target instanceof Canvas;
+        double newX = x;
+        double newY = y;
         if (isCanvasIntersected && isOriginCenter()) {
-            x = (x - canvas.getWidth() / 2);
-            y = (y - canvas.getHeight() / 2);
+            newX = (x - canvas.getWidth() / 2);
+            newY = (y - canvas.getHeight() / 2);
         }
-        if(isCanvasIntersected && mouseEvent.getClickCount() > 0) {
-            propertiesPane.getChildren().clear();
-        }
-        this.mouseCoordinates.setText(String.format("%d,%d", (int) x, (int) y));
+        return Point2D.of(newX, newY);
     }
 
     private boolean isOriginCenter() {
@@ -179,6 +180,5 @@ public class MainController extends VBox {
     private Constants.Origin getSelectedOrigin() {
         return originChoiceBox.getSelectionModel().getSelectedItem();
     }
-
 
 }

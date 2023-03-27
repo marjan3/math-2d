@@ -13,13 +13,12 @@ import javafx.event.EventHandler;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class DrawablePoint {
     private final Circle circle;
     private final Circle invisibleCircle;
     private final ObjectProperty<Point2D> point2DProperty;
-    public final Text label;
+    public final Label label;
     private final ContextMenu contextMenu;
     private VBox editablePropertiesPane;
     private Point2D previousLocation;
@@ -46,7 +45,7 @@ public class DrawablePoint {
         invisibleCircle.setFill(Constants.Colors.TRANSPARENT);
         invisibleCircle.setStrokeWidth(Constants.Widths.ZERO);
         invisibleCircle.setRadius(Constants.Radius.INVISIBLE);
-        label = new Text(name);
+        label = new Label(name);
 
         point2DProperty = new SimpleObjectProperty<>(new Point2D(x, y));
         point2DProperty.addListener((observableValue, number, t1) -> this.move(this.point2DProperty.get()));
@@ -103,8 +102,8 @@ public class DrawablePoint {
         circle.setCenterY(point2D.y);
         invisibleCircle.setCenterX(point2D.x);
         invisibleCircle.setCenterY(point2D.y);
-        label.setX(point2D.x + circle.getRadius());
-        label.setY(point2D.y + circle.getRadius() * 3);
+        label.setTranslateX(point2D.x + Constants.Offsets.LABEL_OFFSET);
+        label.setTranslateY(point2D.y + Constants.Offsets.LABEL_OFFSET);
     }
 
     public List<Node> getChildren() {
