@@ -22,6 +22,8 @@ import javafx.util.Callback;
 public class MainController extends VBox {
 
     @FXML
+    public ChoiceBox<Constants.Origin> originChoiceBox;
+    @FXML
     private Canvas canvas;
     @FXML
     private Label mouseCoordinates;
@@ -33,9 +35,6 @@ public class MainController extends VBox {
     private MenuItem undoMenuItem;
     @FXML
     private MenuItem redoMenuItem;
-    @FXML
-    public ChoiceBox<Constants.Origin> originChoiceBox;
-
     private CanvasWrapper canvasWrapper;
 
     public void initialize() {

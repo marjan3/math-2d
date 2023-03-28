@@ -6,7 +6,12 @@ public interface Constants {
 
     String POINT = "Point";
     String VECTOR = "Vector";
-    String[] OBJECTS = { POINT, VECTOR };
+    String[] OBJECTS = {POINT, VECTOR};
+
+    enum Origin {
+        CENTER,
+        DEFAULT,
+    }
 
     interface Formats {
         String RENAME_FORMAT = "Renaming '%s' ...";
@@ -85,10 +90,5 @@ public interface Constants {
         Color SELECTABLE = Color.BLUE;
         Color OBJECT = Color.BLACK;
         Color TRANSPARENT = new Color(0.0D, 0.0D, 1.0D, 0.0D);
-    }
-
-    enum Origin {
-        CENTER,
-        DEFAULT,
     }
 }

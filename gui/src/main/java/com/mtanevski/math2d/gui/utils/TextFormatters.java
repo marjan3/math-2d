@@ -7,13 +7,13 @@ import java.util.function.UnaryOperator;
 
 public class TextFormatters {
 
-    public static TextFormatter<Double> newDoubleFormatter(){
+    public static TextFormatter<Double> newDoubleFormatter() {
         UnaryOperator<TextFormatter.Change> doublesFilter = change -> {
             String newText = change.getControlNewText();
             try {
                 Double.parseDouble(newText);
                 return change;
-            } catch (NumberFormatException exc){
+            } catch (NumberFormatException exc) {
                 return change;
             }
         };

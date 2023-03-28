@@ -1,6 +1,6 @@
 package com.mtanevski.math2d.gui.commands;
 
-import com.mtanevski.math2d.gui.dialogs.NewObjectDialogResult;
+import com.mtanevski.math2d.gui.dialogs.SimpleDialogResult;
 import com.mtanevski.math2d.math.Point2D;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +15,7 @@ public class CreateRequest {
     private final double x;
     private final double y;
 
-    public static CreateRequest fromDialogResult(NewObjectDialogResult newDialogResult) {
+    public static CreateRequest fromDialogResult(SimpleDialogResult newDialogResult) {
         return CreateRequest.builder()
                 .name(newDialogResult.name)
                 .x(newDialogResult.x)

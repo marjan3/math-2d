@@ -25,7 +25,7 @@ public class CoordinateSystem {
         int height = (int) canvas.getHeight();
 
         // draw x
-        for (double y = START.getY(); y < height; y+=pointIncrement) {
+        for (double y = START.getY(); y < height; y += pointIncrement) {
             // quarter 3
             drawCoordinateLine(canvas, START.getX(), y, width, y);
 
@@ -40,7 +40,7 @@ public class CoordinateSystem {
         }
 
         // draw y
-        for (double x = START.getX(); x < width; x+=pointIncrement) {
+        for (double x = START.getX(); x < width; x += pointIncrement) {
             // quarter 3
             drawCoordinateLine(canvas, x, START.getY(), x, height);
 
@@ -55,13 +55,13 @@ public class CoordinateSystem {
         }
 
         //  draw  coordinates on X
-        for (double x = START.getX(); x < width; x+= numberIncrement) {
+        for (double x = START.getX(); x < width; x += numberIncrement) {
             drawNumberPoint(canvas, x, START.getY(), String.format("%d", (int) x));
             drawNumberPoint(canvas, -x, START.getY(), String.format("%d", (int) -x));
         }
 
         //  draw  coordinates on Y
-        for (double y = START.getY(); y < height; y+= numberIncrement) {
+        for (double y = START.getY(); y < height; y += numberIncrement) {
             drawNumberPoint(canvas, START.getX(), y, String.format("%d", (int) y));
             drawNumberPoint(canvas, START.getY(), -y, String.format("%d", (int) -y));
         }
@@ -88,14 +88,14 @@ public class CoordinateSystem {
         gc.fillText(
                 text,
                 x,
-                y  + 15
+                y + 15
         );
     }
 
     public static void setOrigin(Canvas canvas, Origin origin) {
         int width = (int) canvas.getWidth();
         int height = (int) canvas.getHeight();
-        if(origin == Constants.Origin.CENTER) {
+        if (origin == Constants.Origin.CENTER) {
             GraphicsContext gc = canvas.getGraphicsContext2D();
             Affine affine = new Affine();
             affine.appendTranslation(width * .5, height * .5);

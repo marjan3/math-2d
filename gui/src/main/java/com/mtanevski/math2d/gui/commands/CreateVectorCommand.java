@@ -20,7 +20,7 @@ public class CreateVectorCommand implements Command {
     public void execute() {
         Platform.runLater(() -> {
             Overlay.deselectAll();
-            if(drawableVector == null) {
+            if (drawableVector == null) {
                 if (this.createRequest == null) {
                     var result = SimpleDialog.showXYDialog(Constants.Labels.NEW_VECTOR_LABEL);
                     createRequest = CreateRequest.fromDialogResult(result);

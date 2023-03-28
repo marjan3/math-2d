@@ -13,6 +13,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -20,142 +21,158 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="770.0" prefWidth="1385.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <Menu mnemonicParsing="false" text="New">
+<VBox prefHeight="770.0" prefWidth="1385.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <MenuBar>
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#newPoint" text="Point" />
-                        <MenuItem mnemonicParsing="false" onAction="#newVector" text="Vector" />
+                        <Menu mnemonicParsing="false" text="New">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#newPoint" text="Point">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                    </accelerator>
+                                </MenuItem>
+                                <MenuItem mnemonicParsing="false" onAction="#newVector" text="Vector">
+                                    <accelerator>
+                                        <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                    </accelerator>
+                                </MenuItem>
+                            </items>
+                        </Menu>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
                     </items>
-                  </Menu>
-              <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-                <MenuItem fx:id="undoMenuItem" mnemonicParsing="false" onAction="#undo" text="Undo" />
-                <MenuItem fx:id="redoMenuItem" mnemonicParsing="false" onAction="#redo" text="Redo" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <HBox VBox.vgrow="ALWAYS">
-         <children>
-            <VBox prefHeight="702.0" prefWidth="214.0">
-               <children>
-                  <TabPane>
-                     <tabs>
-                        <Tab closable="false" text="2D objects">
-                           <content>
-                              <AnchorPane prefHeight="664.0" prefWidth="206.0">
-                                 <children>
-                                    <VBox prefHeight="665.0" prefWidth="206.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <ListView fx:id="objectsList" prefHeight="677.0" prefWidth="206.0" />
-                                          <Label prefHeight="173.0" prefWidth="206.0" text="Drag an item from the list of 2D Objects into the canvas" textAlignment="CENTER" wrapText="true">
-                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                             </padding>
-                                          </Label>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </Tab>
-                     </tabs>
-                  </TabPane>
-               </children>
-            </VBox>
-            <ScrollPane HBox.hgrow="ALWAYS">
-               <content>
-                <AnchorPane maxHeight="-1.0" maxWidth="-1.0">
-                     <children>
-                        <Canvas fx:id="canvas" height="600.0" layoutX="179.0" layoutY="69.0" width="800.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
-                        <Label layoutX="14.0" layoutY="14.0" text="Canvas" />
-                     </children>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem fx:id="undoMenuItem" mnemonicParsing="false" onAction="#undo" text="Undo">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="redoMenuItem" mnemonicParsing="false" onAction="#redo" text="Redo">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <HBox VBox.vgrow="ALWAYS">
+            <children>
+                <VBox prefHeight="702.0" prefWidth="214.0">
+                    <children>
+                        <TabPane VBox.vgrow="ALWAYS">
+                            <tabs>
+                                <Tab closable="false" text="2D objects">
+                                    <content>
+                                        <AnchorPane prefHeight="664.0" prefWidth="206.0">
+                                            <children>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="665.0" prefWidth="206.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <children>
+                                                        <ListView fx:id="objectsList" prefHeight="677.0" prefWidth="206.0" />
+                                                        <Label maxHeight="173.0" maxWidth="206.0" prefHeight="173.0" prefWidth="206.0" text="Drag an item from the list of 2D Objects into the canvas" textAlignment="CENTER" wrapText="true">
+                                                            <padding>
+                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                            </padding>
+                                                        </Label>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </Tab>
+                            </tabs>
+                        </TabPane>
+                    </children>
+                </VBox>
+                <ScrollPane HBox.hgrow="ALWAYS">
+                    <content>
+                        <AnchorPane maxHeight="-1.0" maxWidth="-1.0">
+                            <children>
+                                <Canvas fx:id="canvas" height="600.0" layoutX="179.0" layoutY="69.0" width="800.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+                                <Label layoutX="14.0" layoutY="14.0" text="Canvas" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+                <AnchorPane prefHeight="300.0" prefWidth="292.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <tabs>
+                                <Tab style="-fx-font-size: 12px;" text="Inspector">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0">
+                                            <children>
+                                                <VBox fx:id="propertiesPane" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                </VBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </Tab>
+                                <Tab style="-fx-font-size: 12px;" text="System">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0">
+                                            <children>
+                                                <VBox fx:id="propertiesPane1" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <children>
+                                                        <GridPane vgap="5.0">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="101.0" />
+                                                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="184.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                            <children>
+                                                                <ChoiceBox fx:id="originChoiceBox" onAction="#originChange" prefHeight="25.0" prefWidth="109.0" GridPane.columnIndex="1">
+                                                                    <GridPane.margin>
+                                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                    </GridPane.margin>
+                                                                </ChoiceBox>
+                                                                <Label text="Origin">
+                                                                    <GridPane.margin>
+                                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                            </children>
+                                                            <padding>
+                                                                <Insets bottom="10.0" top="10.0" />
+                                                            </padding>
+                                                        </GridPane>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </Tab>
+                            </tabs>
+                        </TabPane>
+                    </children>
                 </AnchorPane>
-               </content>
-            </ScrollPane>
-            <AnchorPane prefHeight="300.0" prefWidth="292.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <tabs>
-                      <Tab style="-fx-font-size: 12px;" text="Inspector">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0">
-                                 <children>
-                                    <VBox fx:id="propertiesPane" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                              </VBox>
-                                 </children>
-                              </AnchorPane>
-                        </content>
-                      </Tab>
-                        <Tab style="-fx-font-size: 12px;" text="System">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0">
-                                 <children>
-                                    <VBox fx:id="propertiesPane1" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <GridPane vgap="5.0">
-                                            <columnConstraints>
-                                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="101.0" />
-                                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="184.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
-                                             <children>
-                                                <ChoiceBox fx:id="originChoiceBox" onAction="#originChange" prefHeight="25.0" prefWidth="109.0" GridPane.columnIndex="1">
-                                                   <GridPane.margin>
-                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                   </GridPane.margin>
-                                                </ChoiceBox>
-                                                <Label text="Origin">
-                                                   <GridPane.margin>
-                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                   </GridPane.margin>
-                                                </Label>
-                                             </children>
-                                             <padding>
-                                                <Insets bottom="10.0" top="10.0" />
-                                             </padding>
-                                          </GridPane>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </Tab>
-                    </tabs>
-                  </TabPane>
-               </children>
-            </AnchorPane>
-         </children>
-      </HBox>
-      <Separator prefWidth="200.0" />
-      <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-        <items>
-            <Label fx:id="mouseCoordinates" prefHeight="17.0" text="Unknown, Unknown">
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </Label>
-            <Label text="Mouse Coordinates:">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </Label>
-        </items>
-      </ToolBar>
-   </children>
+            </children>
+        </HBox>
+        <Separator prefWidth="200.0" />
+        <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <items>
+                <Label fx:id="mouseCoordinates" prefHeight="17.0" text="Unknown, Unknown">
+                    <padding>
+                        <Insets left="20.0" />
+                    </padding>
+                </Label>
+                <Label text="Pointer Coordinates:">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </Label>
+            </items>
+        </ToolBar>
+    </children>
 </VBox>

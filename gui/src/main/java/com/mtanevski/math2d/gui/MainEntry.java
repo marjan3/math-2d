@@ -10,6 +10,10 @@ import java.net.URL;
 
 public class MainEntry extends Application {
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         // identify main component
@@ -22,9 +26,5 @@ public class MainEntry extends Application {
         stage.setScene(scene);
         stage.setTitle(Constants.Labels.TITLE);
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

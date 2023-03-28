@@ -1,301 +1,334 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
-
-<VBox prefHeight="690.0" prefWidth="401.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TextFlow prefHeight="31.0" prefWidth="401.0" style="-fx-background-color: #dddddd;" textAlignment="CENTER">
-         <children>
-            <Label fx:id="nameLabel" text="((A) + B) + C)  vector">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </Label>
-         </children>
-      </TextFlow>
-      <Accordion VBox.vgrow="NEVER">
-        <panes>
-          <TitledPane animated="false" text="Properties">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0">
-                     <children>
-                        <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <GridPane alignment="CENTER" vgap="5.0" VBox.vgrow="ALWAYS">
-                                <columnConstraints>
-                                  <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="293.0" minWidth="10.0" percentWidth="28.0" prefWidth="162.0" />
-                                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="527.0" minWidth="10.0" percentWidth="72.0" prefWidth="438.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label alignment="CENTER" contentDisplay="BOTTOM" text="X">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <TextField GridPane.columnIndex="1" fx:id="xField">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                    <Label text="Y" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <TextField fx:id="yField" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                    <Label text="Length" GridPane.rowIndex="2">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <TextField fx:id="lengthField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </padding>
-                              </GridPane>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </TitledPane>
-        </panes>
-      </Accordion>
-      <Accordion VBox.vgrow="NEVER">
-        <panes>
-          <TitledPane animated="false" text="Calculated">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0">
-                     <children>
-                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <GridPane alignment="CENTER" vgap="5.0" VBox.vgrow="ALWAYS">
-                                 <columnConstraints>
-                                    <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="293.0" minWidth="10.0" percentWidth="28.0" prefWidth="162.0" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="527.0" minWidth="10.0" percentWidth="72.0" prefWidth="438.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                                 <children>
-                                    <TextField fx:id="squaredLengthField" editable="false" GridPane.columnIndex="1">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                    <TextField fx:id="unitVectorField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                    <Label text="Squared length">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <Label text="Unit vector" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <Label text="Category" GridPane.rowIndex="2">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <TextField fx:id="categoryField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                    <Label text="Slope" GridPane.rowIndex="3">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <TextField fx:id="slopeField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                    <Label text="Angle" GridPane.rowIndex="4">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <TextField fx:id="angleField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </padding>
-                              </GridPane>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </TitledPane>
-        </panes>
-      </Accordion>
-      <Accordion VBox.vgrow="NEVER">
-        <panes>
-          <TitledPane animated="false" text="Operations">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0">
-                     <children>
-                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <GridPane alignment="CENTER" vgap="5.0" VBox.vgrow="ALWAYS">
-                                 <columnConstraints>
-                                    <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="293.0" minWidth="10.0" percentWidth="30.0" prefWidth="162.0" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="527.0" minWidth="10.0" percentWidth="70.0" prefWidth="438.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                                 <children>
-                                    <Button mnemonicParsing="false" onAction="#negate" text="negate" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Button>
-                                    <Button mnemonicParsing="false" onAction="#multiply" text="multiply" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Button>
-                                    <Button mnemonicParsing="false" onAction="#divide" text="divide" GridPane.rowIndex="2">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Button>
-                                    <Button mnemonicParsing="false" onAction="#add" text="add" GridPane.rowIndex="3">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Button>
-                                    <Button mnemonicParsing="false" onAction="#subtract" text="subtract" GridPane.rowIndex="4">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Button>
-                                    <TextField fx:id="multiplyFactorField" prefHeight="25.0" prefWidth="301.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                    <TextField fx:id="divisionFactorField" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
-                                       <children>
-                                          <TextField fx:id="addXField" HBox.hgrow="ALWAYS">
-                                             <HBox.margin>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <TextField fx:id="addYField" HBox.hgrow="ALWAYS">
-                                             <HBox.margin>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                       <children>
-                                          <TextField fx:id="subtractXField" HBox.hgrow="ALWAYS">
-                                             <HBox.margin>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <TextField fx:id="subtractYField" HBox.hgrow="ALWAYS">
-                                             <HBox.margin>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                       </children>
-                                    </HBox>
-                                    <Button mnemonicParsing="false" onAction="#normalize" text="normalize">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Button>
-                                    <TextField fx:id="rotationAngleField" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                    <Button mnemonicParsing="false" onAction="#rotate" text="rotate" GridPane.rowIndex="5">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Button>
-                                    <Button mnemonicParsing="false" onAction="#negate" text="negate" GridPane.rowIndex="6">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Button>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </padding>
-                              </GridPane>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </TitledPane>
-        </panes>
-      </Accordion>
-   </children>
+<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="690.0" prefWidth="401.0" xmlns="http://javafx.com/javafx">
+    <children>
+        <TextFlow prefHeight="31.0" prefWidth="401.0" style="-fx-background-color: #dddddd;" textAlignment="CENTER">
+            <children>
+                <Label fx:id="nameLabel" text="((A) + B) + C)  vector">
+                    <font>
+                        <Font name="System Bold" size="12.0"/>
+                    </font>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                </Label>
+            </children>
+        </TextFlow>
+        <Accordion VBox.vgrow="NEVER">
+            <panes>
+                <TitledPane animated="false" text="Properties">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0">
+                            <children>
+                                <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <GridPane alignment="CENTER" vgap="5.0" VBox.vgrow="ALWAYS">
+                                            <columnConstraints>
+                                                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="293.0"
+                                                                   minWidth="10.0" percentWidth="28.0"
+                                                                   prefWidth="162.0"/>
+                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="527.0"
+                                                                   minWidth="10.0" percentWidth="72.0"
+                                                                   prefWidth="438.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <Label alignment="CENTER" contentDisplay="BOTTOM" text="X">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Label>
+                                                <TextField GridPane.columnIndex="1" fx:id="xField">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <Label text="Y" GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Label>
+                                                <TextField fx:id="yField" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <Label text="Length" GridPane.rowIndex="2">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Label>
+                                                <TextField fx:id="lengthField" editable="false" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="2">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </TextField>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets/>
+                                            </VBox.margin>
+                                            <padding>
+                                                <Insets bottom="10.0" top="10.0"/>
+                                            </padding>
+                                        </GridPane>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+            </panes>
+        </Accordion>
+        <Accordion VBox.vgrow="NEVER">
+            <panes>
+                <TitledPane animated="false" text="Calculated">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0">
+                            <children>
+                                <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <GridPane alignment="CENTER" vgap="5.0" VBox.vgrow="ALWAYS">
+                                            <columnConstraints>
+                                                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="293.0"
+                                                                   minWidth="10.0" percentWidth="28.0"
+                                                                   prefWidth="162.0"/>
+                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="527.0"
+                                                                   minWidth="10.0" percentWidth="72.0"
+                                                                   prefWidth="438.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <TextField fx:id="squaredLengthField" editable="false"
+                                                           GridPane.columnIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <TextField fx:id="unitVectorField" editable="false"
+                                                           GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <Label text="Squared length">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Label>
+                                                <Label text="Unit vector" GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Label>
+                                                <Label text="Category" GridPane.rowIndex="2">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Label>
+                                                <TextField fx:id="categoryField" editable="false"
+                                                           GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <Label text="Slope" GridPane.rowIndex="3">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Label>
+                                                <TextField fx:id="slopeField" editable="false" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="3">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <Label text="Angle" GridPane.rowIndex="4">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Label>
+                                                <TextField fx:id="angleField" editable="false" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="4">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </TextField>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="10.0" top="10.0"/>
+                                            </padding>
+                                        </GridPane>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+            </panes>
+        </Accordion>
+        <Accordion VBox.vgrow="NEVER">
+            <panes>
+                <TitledPane animated="false" text="Operations">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0">
+                            <children>
+                                <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <GridPane alignment="CENTER" vgap="5.0" VBox.vgrow="ALWAYS">
+                                            <columnConstraints>
+                                                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="293.0"
+                                                                   minWidth="10.0" percentWidth="30.0"
+                                                                   prefWidth="162.0"/>
+                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="527.0"
+                                                                   minWidth="10.0" percentWidth="70.0"
+                                                                   prefWidth="438.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <Button mnemonicParsing="false" onAction="#negate" text="negate"
+                                                        GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#multiply" text="multiply"
+                                                        GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#divide" text="divide"
+                                                        GridPane.rowIndex="2">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#add" text="add"
+                                                        GridPane.rowIndex="3">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#subtract" text="subtract"
+                                                        GridPane.rowIndex="4">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Button>
+                                                <TextField fx:id="multiplyFactorField" prefHeight="25.0"
+                                                           prefWidth="301.0" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <TextField fx:id="divisionFactorField" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="2">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0"
+                                                      GridPane.columnIndex="1" GridPane.hgrow="ALWAYS"
+                                                      GridPane.rowIndex="3">
+                                                    <children>
+                                                        <TextField fx:id="addXField" HBox.hgrow="ALWAYS">
+                                                            <HBox.margin>
+                                                                <Insets bottom="10.0" left="10.0" right="10.0"
+                                                                        top="10.0"/>
+                                                            </HBox.margin>
+                                                        </TextField>
+                                                        <TextField fx:id="addYField" HBox.hgrow="ALWAYS">
+                                                            <HBox.margin>
+                                                                <Insets bottom="10.0" left="10.0" right="10.0"
+                                                                        top="10.0"/>
+                                                            </HBox.margin>
+                                                        </TextField>
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                    <children>
+                                                        <TextField fx:id="subtractXField" HBox.hgrow="ALWAYS">
+                                                            <HBox.margin>
+                                                                <Insets bottom="10.0" left="10.0" right="10.0"
+                                                                        top="10.0"/>
+                                                            </HBox.margin>
+                                                        </TextField>
+                                                        <TextField fx:id="subtractYField" HBox.hgrow="ALWAYS">
+                                                            <HBox.margin>
+                                                                <Insets bottom="10.0" left="10.0" right="10.0"
+                                                                        top="10.0"/>
+                                                            </HBox.margin>
+                                                        </TextField>
+                                                    </children>
+                                                </HBox>
+                                                <Button mnemonicParsing="false" onAction="#normalize" text="normalize">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Button>
+                                                <TextField fx:id="rotationAngleField" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="5">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <Button mnemonicParsing="false" onAction="#rotate" text="rotate"
+                                                        GridPane.rowIndex="5">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#negate" text="negate"
+                                                        GridPane.rowIndex="6">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Button>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="10.0" top="10.0"/>
+                                            </padding>
+                                        </GridPane>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+            </panes>
+        </Accordion>
+    </children>
 </VBox>

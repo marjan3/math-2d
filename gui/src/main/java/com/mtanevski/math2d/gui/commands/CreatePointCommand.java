@@ -20,7 +20,7 @@ public class CreatePointCommand implements Command {
     public void execute() {
         Platform.runLater(() -> {
             Overlay.deselectAll();
-            if(drawablePoint == null) {
+            if (drawablePoint == null) {
                 if (createRequest == null) {
                     var result = SimpleDialog.showXYDialog(Constants.Labels.NEW_POINT_LABEL);
                     createRequest = CreateRequest.fromDialogResult(result);

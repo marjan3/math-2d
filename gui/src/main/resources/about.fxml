@@ -2,34 +2,40 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<GridPane alignment="CENTER" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="163.0" prefWidth="307.0" vgap="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane alignment="CENTER" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity"
+          minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="163.0" prefWidth="307.0"
+          vgap="10.0" xmlns="http://javafx.com/javafx">
     <columnConstraints>
-        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" percentWidth="50.0" />
-        <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" percentWidth="50.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="238.0" minHeight="15.0" prefHeight="90.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="38.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="238.0" minHeight="15.0" prefHeight="90.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="38.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <padding>
-        <Insets top="10.0" />
+        <Insets top="10.0"/>
     </padding>
     <children>
-        <Label text="Math 2D" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+        <Label text="Math 2D" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER"
+               GridPane.valignment="CENTER">
             <font>
-                <Font name="System Bold" size="14.0" />
+                <Font name="System Bold" size="14.0"/>
             </font>
         </Label>
-        <Label prefHeight="65.0" prefWidth="248.0" text="I use this tool to visualize mathematics-related problems and solutions for programming with graphics on a 2D space. " textAlignment="CENTER" wrapText="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-      <Label prefHeight="29.0" prefWidth="248.0" text="created by marjantanevski@outlook.com, 2021" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-         <padding>
-            <Insets bottom="15.0" />
-         </padding></Label>
+        <Label prefHeight="65.0" prefWidth="248.0"
+               text="I use this tool to visualize mathematics-related problems and solutions for programming with graphics on a 2D space. "
+               textAlignment="CENTER" wrapText="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER"
+               GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
+        <Label prefHeight="29.0" prefWidth="248.0" text="created by marjantanevski@outlook.com, 2021"
+               GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2"
+               GridPane.valignment="CENTER">
+            <padding>
+                <Insets bottom="15.0"/>
+            </padding>
+        </Label>
     </children>
 </GridPane>

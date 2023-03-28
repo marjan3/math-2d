@@ -1,22 +1,23 @@
 package com.mtanevski.math2d.gui.commands;
 
-import com.mtanevski.math2d.gui.canvas.Overlay;
 import com.mtanevski.math2d.gui.canvas.point.DrawablePoint;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 
 @ToString
 @AllArgsConstructor
-public class DeletePointCommand implements Command {
+public class RenamePointCommand implements Command {
     private final DrawablePoint drawablePoint;
+    private final String previousName;
+    private final String nextName;
 
     @Override
     public void execute() {
-        Overlay.remove(drawablePoint);
+        drawablePoint.setName(nextName);
     }
 
     @Override
     public void undo() {
-        Overlay.drawPoint(drawablePoint);
+        drawablePoint.setName(previousName);
     }
 }

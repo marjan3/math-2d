@@ -1,12 +1,19 @@
 package com.mtanevski.math2d.gui.canvas.point;
 
 import com.mtanevski.math2d.gui.Constants;
+import com.mtanevski.math2d.gui.canvas.vector.VectorProperties;
+import com.mtanevski.math2d.gui.commands.CommandsManager;
+import com.mtanevski.math2d.gui.commands.MovePointCommand;
+import com.mtanevski.math2d.gui.commands.MoveVectorCommand;
 import com.mtanevski.math2d.gui.utils.FormatUtil;
 import com.mtanevski.math2d.gui.utils.TextFormatters;
 import com.mtanevski.math2d.math.Point2D;
+import com.mtanevski.math2d.math.Vector2D;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -17,6 +24,11 @@ import javafx.util.StringConverter;
 import java.io.IOException;
 
 public class PointProperties {
+    private final VBox pane;
+    private final ObjectProperty<Point2D> point2DProperty;
+    private final StringProperty nameProperty;
+    private final DrawablePoint drawablePoint;
+
     @FXML
     public TextField xField;
     @FXML
@@ -24,16 +36,12 @@ public class PointProperties {
     @FXML
     public Label nameLabel;
 
-    private final VBox pane;
-    private final ObjectProperty<Point2D> point2DProperty;
-    private final StringProperty nameProperty;
-
-    public PointProperties(ObjectProperty<Point2D> point2DProperty, StringProperty nameProperty) {
+    public PointProperties(DrawablePoint drawablePoint, ObjectProperty<Point2D> point2DProperty, StringProperty nameProperty) {
+        this.drawablePoint = drawablePoint;
         this.point2DProperty = point2DProperty;
         this.nameProperty = nameProperty;
         try {
             var resource = PointProperties.class.getResource(Constants.Resources.POINT_2D_PROPERTIES_FXML);
-
             var loader = new FXMLLoader(resource);
             loader.setLocation(resource);
             loader.setController(this);
@@ -62,6 +70,7 @@ public class PointProperties {
                 return Point2D.of(FormatUtil.parseDouble(s), point2D.y);
             }
         });
+        xField.focusedProperty().addListener(new FocusPropertyChangeListener());
 
         // y
         yField.setTextFormatter(TextFormatters.newDoubleFormatter());
@@ -78,9 +87,23 @@ public class PointProperties {
                 return Point2D.of(point2D.x, FormatUtil.parseDouble(s));
             }
         });
+        yField.focusedProperty().addListener(new FocusPropertyChangeListener());
     }
 
     public VBox getPane() {
         return pane;
+    }
+
+    private class FocusPropertyChangeListener implements ChangeListener<Boolean> {
+        Point2D previousLocation;
+        @Override
+        public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+        {
+            if (newPropertyValue) {
+                previousLocation = point2DProperty.get();
+            } else {
+                CommandsManager.execute(new MovePointCommand(drawablePoint, previousLocation, point2DProperty.get()));
+            }
+        }
     }
 }

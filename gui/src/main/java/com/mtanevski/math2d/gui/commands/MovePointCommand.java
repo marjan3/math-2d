@@ -1,6 +1,5 @@
 package com.mtanevski.math2d.gui.commands;
 
-import com.mtanevski.math2d.gui.canvas.Overlay;
 import com.mtanevski.math2d.gui.canvas.point.DrawablePoint;
 import com.mtanevski.math2d.math.Point2D;
 import lombok.AllArgsConstructor;

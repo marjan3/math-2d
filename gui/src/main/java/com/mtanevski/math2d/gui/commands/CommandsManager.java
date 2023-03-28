@@ -18,7 +18,7 @@ public class CommandsManager {
     }
 
     public static void undo() {
-        if(!history.isEmpty()) {
+        if (!history.isEmpty()) {
             var lastUndoCommand = history.pop();
             undoStack.push(lastUndoCommand);
             lastUndoCommand.undo();
@@ -27,7 +27,7 @@ public class CommandsManager {
     }
 
     public static void redo() {
-        if(!undoStack.isEmpty()) {
+        if (!undoStack.isEmpty()) {
             var command = undoStack.pop();
             history.push(command);
             updateProperties();

@@ -1,6 +1,8 @@
 package com.mtanevski.math2d.gui.canvas.vector;
 
 import com.mtanevski.math2d.gui.Constants;
+import com.mtanevski.math2d.gui.commands.CommandsManager;
+import com.mtanevski.math2d.gui.commands.MoveVectorCommand;
 import com.mtanevski.math2d.gui.utils.FormatUtil;
 import com.mtanevski.math2d.gui.utils.ReadOnlyStringConverter;
 import com.mtanevski.math2d.gui.utils.TextFormatters;
@@ -8,6 +10,8 @@ import com.mtanevski.math2d.math.Vector2D;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +24,10 @@ import java.io.IOException;
 
 public class VectorProperties {
 
+    private final VBox root;
+    private final ObjectProperty<Vector2D> vector2DProperty;
+    private final StringProperty nameProperty;
+    private final DrawableVector drawableVector;
     @FXML
     public Label nameLabel;
     @FXML
@@ -53,11 +61,8 @@ public class VectorProperties {
     @FXML
     public TextField rotationAngleField;
 
-    private final VBox root;
-    private final ObjectProperty<Vector2D> vector2DProperty;
-    private final StringProperty nameProperty;
-
-    public VectorProperties(ObjectProperty<Vector2D> vector2DProperty, StringProperty nameProperty) {
+    public VectorProperties(DrawableVector drawableVector, ObjectProperty<Vector2D> vector2DProperty, StringProperty nameProperty) {
+        this.drawableVector = drawableVector;
         this.vector2DProperty = vector2DProperty;
         this.nameProperty = nameProperty;
         try {
@@ -86,14 +91,16 @@ public class VectorProperties {
 
             @Override
             public Vector2D fromString(String s) {
-                var vector2D = vector2DProperty.get();
-                return Vector2D.of(FormatUtil.parseDouble(s), vector2D.y);
+                var previousLocation = vector2DProperty.get();
+                return Vector2D.of(FormatUtil.parseDouble(s), previousLocation.y);
             }
         });
+        xField.focusedProperty().addListener(new FocusPropertyChangeListener());
 
         // y
         yField.setTextFormatter(TextFormatters.newDoubleFormatter());
         yField.setText(String.valueOf(vector2DProperty.get().y));
+        yField.focusedProperty().addListener(new FocusPropertyChangeListener());
         Bindings.bindBidirectional(yField.textProperty(), vector2DProperty, new StringConverter<>() {
             @Override
             public String toString(Vector2D vector2D) {
@@ -102,8 +109,8 @@ public class VectorProperties {
 
             @Override
             public Vector2D fromString(String s) {
-                var vector2D = vector2DProperty.get();
-                return Vector2D.of(vector2D.x, FormatUtil.parseDouble(s));
+                var previousLocation = vector2DProperty.get();
+                return Vector2D.of(previousLocation.x, FormatUtil.parseDouble(s));
             }
         });
 
@@ -231,5 +238,18 @@ public class VectorProperties {
 
     public VBox getPane() {
         return root;
+    }
+
+    private class FocusPropertyChangeListener implements ChangeListener<Boolean> {
+        Vector2D previousLocation;
+        @Override
+        public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+        {
+            if (newPropertyValue) {
+                previousLocation = vector2DProperty.get();
+            } else {
+                CommandsManager.execute(new MoveVectorCommand(drawableVector, previousLocation, vector2DProperty.get()));
+            }
+        }
     }
 }

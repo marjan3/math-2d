@@ -21,7 +21,7 @@ public class FxUtil {
 
     public static Node loadUtilWindow(String location, Object controller, Window window) {
         var fxmlLoader = new FXMLLoader(FxUtil.class.getClassLoader().getResource(location));
-        if(controller != null) {
+        if (controller != null) {
             fxmlLoader.setController(controller);
         }
         try {
@@ -40,14 +40,14 @@ public class FxUtil {
     }
 
     public static void switchNode(Scene scene, Node node, String selector) {
-        VBox propertiesPane = (VBox) scene.lookup(selector);
+        var propertiesPane = (VBox) scene.lookup(selector);
         propertiesPane.getChildren().clear();
         propertiesPane.getChildren().addAll(node);
     }
 
 
     public static Image createImage(Object context, String resourceName) {
-        URL url = context.getClass().getClassLoader().getResource(resourceName);
+        var url = context.getClass().getClassLoader().getResource(resourceName);
         Objects.requireNonNull(url);
         return new Image(url.toExternalForm());
     }

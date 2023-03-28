@@ -8,7 +8,7 @@ public class FormatUtil {
     public static double parseDouble(String numberAsString) {
         try {
             return Double.parseDouble(numberAsString);
-        }catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             return 0.0;
         }
     }

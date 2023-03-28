@@ -2,15 +2,14 @@ package com.mtanevski.math2d.gui.canvas;
 
 import com.mtanevski.math2d.gui.Constants;
 import com.mtanevski.math2d.math.Point2D;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.input.*;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Affine;
-
-import static com.mtanevski.math2d.gui.utils.FxUtil.debug;
 
 public class CanvasWrapper {
 
@@ -32,29 +31,29 @@ public class CanvasWrapper {
         this.proxyDragEvents();
     }
 
-    public void setOnDragDropped(EventHandler<? super DragEvent> value) {
-        canvas.setOnDragDropped(value);
-        Overlay.pane.setOnDragDropped(value);
-    }
-
-    public void setOnMouseEnteredOrMoved(EventHandler<? super MouseEvent> value){
-        canvas.setOnMouseEntered(value);
-        canvas.setOnMouseMoved(value);
-        Overlay.pane.setOnMouseEntered(value);
-        Overlay.pane.setOnMouseMoved(value);
-    }
-
-    public void setOnMouseClicked(EventHandler<? super MouseEvent> value){
-        canvas.setOnMouseClicked(value);
-        Overlay.pane.setOnMouseClicked(value);
-    }
-
     private static void handleOnDragOver(DragEvent event) {
         Dragboard db = event.getDragboard();
         if (db.hasString()) {
             event.acceptTransferModes(TransferMode.COPY);
         }
         event.consume();
+    }
+
+    public void setOnDragDropped(EventHandler<? super DragEvent> value) {
+        canvas.setOnDragDropped(value);
+        Overlay.pane.setOnDragDropped(value);
+    }
+
+    public void setOnMouseEnteredOrMoved(EventHandler<? super MouseEvent> value) {
+        canvas.setOnMouseEntered(value);
+        canvas.setOnMouseMoved(value);
+        Overlay.pane.setOnMouseEntered(value);
+        Overlay.pane.setOnMouseMoved(value);
+    }
+
+    public void setOnMouseClicked(EventHandler<? super MouseEvent> value) {
+        canvas.setOnMouseClicked(value);
+        Overlay.pane.setOnMouseClicked(value);
     }
 
     public void draw(Constants.Origin origin) {
@@ -74,11 +73,11 @@ public class CanvasWrapper {
         Overlay.pane.setOnDragOver(CanvasWrapper::handleOnDragOver);
 
         canvas.setOnMousePressed((MouseEvent event) -> {
-                this.selectionStart = Point2D.of(event.getX(), event.getY());
+            this.selectionStart = Point2D.of(event.getX(), event.getY());
         });
         canvas.setOnMouseDragged((MouseEvent event) -> {
-                this.selectionEnd = Point2D.of(event.getX(), event.getY());
-                Overlay.redrawDragSquare(this.selectionStart, this.selectionEnd);
+            this.selectionEnd = Point2D.of(event.getX(), event.getY());
+            Overlay.redrawDragSquare(this.selectionStart, this.selectionEnd);
         });
         canvas.setOnMouseReleased((MouseEvent event) -> {
             Overlay.removeDragSquare();

@@ -1,86 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
-
-
-<VBox prefHeight="168.0" prefWidth="445.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TextFlow prefHeight="31.0" prefWidth="401.0" style="-fx-background-color: #dddddd;" textAlignment="CENTER">
-         <children>
-            <Label fx:id="nameLabel" text="A  point">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </Label>
-         </children>
-      </TextFlow>
-      <Accordion>
-         <panes>
-            <TitledPane animated="false" text="Properties">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0">
-                     <children>
-                        <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <GridPane alignment="CENTER" vgap="5.0" VBox.vgrow="ALWAYS">
-                                 <columnConstraints>
-                                    <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="293.0" minWidth="10.0" percentWidth="28.0" prefWidth="162.0" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="527.0" minWidth="10.0" percentWidth="72.0" prefWidth="438.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                                 <children>
-                                    <Label alignment="CENTER" contentDisplay="BOTTOM" text="X">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <TextField GridPane.columnIndex="1" fx:id="xField">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                    <Label text="Y" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <TextField fx:id="yField" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </padding>
-                              </GridPane>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </TitledPane>
-         </panes>
-      </Accordion>
-   </children>
+<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="168.0" prefWidth="445.0" xmlns="http://javafx.com/javafx">
+    <children>
+        <TextFlow prefHeight="31.0" prefWidth="401.0" style="-fx-background-color: #dddddd;" textAlignment="CENTER">
+            <children>
+                <Label fx:id="nameLabel" text="A  point">
+                    <font>
+                        <Font name="System Bold" size="12.0"/>
+                    </font>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                </Label>
+            </children>
+        </TextFlow>
+        <Accordion>
+            <panes>
+                <TitledPane animated="false" text="Properties">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0">
+                            <children>
+                                <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <GridPane alignment="CENTER" vgap="5.0" VBox.vgrow="ALWAYS">
+                                            <columnConstraints>
+                                                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="293.0"
+                                                                   minWidth="10.0" percentWidth="28.0"
+                                                                   prefWidth="162.0"/>
+                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="527.0"
+                                                                   minWidth="10.0" percentWidth="72.0"
+                                                                   prefWidth="438.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <Label alignment="CENTER" contentDisplay="BOTTOM" text="X">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Label>
+                                                <TextField GridPane.columnIndex="1" fx:id="xField">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </TextField>
+                                                <Label text="Y" GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </Label>
+                                                <TextField fx:id="yField" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="1">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                    </GridPane.margin>
+                                                </TextField>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets/>
+                                            </VBox.margin>
+                                            <padding>
+                                                <Insets bottom="10.0" top="10.0"/>
+                                            </padding>
+                                        </GridPane>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+            </panes>
+        </Accordion>
+    </children>
 </VBox>

@@ -1,22 +1,23 @@
 package com.mtanevski.math2d.gui.commands;
 
-import com.mtanevski.math2d.gui.canvas.Overlay;
 import com.mtanevski.math2d.gui.canvas.vector.DrawableVector;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 
 @ToString
 @AllArgsConstructor
-public class DeleteVectorCommand implements Command {
+public class RenameVectorCommand implements Command {
     private final DrawableVector drawableVector;
+    private final String previousName;
+    private final String nextName;
 
     @Override
     public void execute() {
-        Overlay.remove(drawableVector);
+        drawableVector.setName(nextName);
     }
 
     @Override
     public void undo() {
-        Overlay.drawVector(drawableVector);
+        drawableVector.setName(previousName);
     }
 }

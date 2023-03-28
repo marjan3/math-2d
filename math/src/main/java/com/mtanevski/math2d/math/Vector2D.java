@@ -144,6 +144,16 @@ public class Vector2D implements Cloneable {
         return new Vector2D(vector2D.x / scalar, vector2D.y / scalar);
     }
 
+    /**
+     * Multiples a vector by a given scalar value
+     *
+     * @param vector2D the vector to multiply
+     * @param scalar   the value that the vector will be multiplied by
+     * @return the new multiplied vector
+     */
+    public static Vector2D multiply(Vector2D vector2D, double scalar) {
+        return new Vector2D(vector2D.x * scalar, vector2D.y * scalar);
+    }
 
     /**
      * Also known as magnitude which can represent any quantity: length, distance, movement, displacement, velocity, force, etc.
@@ -154,7 +164,6 @@ public class Vector2D implements Cloneable {
     public double getLength() {
         return Math.sqrt(x * x + y * y);
     }
-
 
     /**
      * Used as an alternative to avoid doing square root since square root is considered to take up resources
@@ -186,11 +195,11 @@ public class Vector2D implements Cloneable {
 
     /**
      * TODO
+     *
      * @param reductionLength
      */
-    public void shortenLength(double reductionLength)
-    {
-        this.multiply(1 - reductionLength/this.getLength());
+    public void shortenLength(double reductionLength) {
+        this.multiply(1 - reductionLength / this.getLength());
     }
 
     /**
@@ -265,17 +274,6 @@ public class Vector2D implements Cloneable {
     public void negate() {
         x = -x;
         y = -y;
-    }
-
-    /**
-     * Multiples a vector by a given scalar value
-     *
-     * @param vector2D the vector to multiply
-     * @param scalar   the value that the vector will be multiplied by
-     * @return the new multiplied vector
-     */
-    public static Vector2D multiply(Vector2D vector2D, double scalar) {
-        return new Vector2D(vector2D.x * scalar, vector2D.y * scalar);
     }
 
     /**
@@ -388,6 +386,7 @@ public class Vector2D implements Cloneable {
     /**
      * Determines on which quadrant does the vector belongs to,
      * where P=positive, N=negative, Z=zero
+     *
      * @return the category
      */
     public String getCategory() {
