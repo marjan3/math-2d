@@ -62,7 +62,7 @@ public class VectorContextMenu extends ContextMenu {
             this.getItems().forEach(m -> {
                 if (m instanceof Menu menu) {
                     menu.getItems().clear();
-                    Overlay.vectors.values().forEach(drawableVector -> {
+                    Overlay.getVectors().forEach(drawableVector -> {
                         MenuItem menuItem = new MenuItem(drawableVector.getName());
                         menuItem.setUserData(drawableVector);
                         menu.getItems().add(menuItem);

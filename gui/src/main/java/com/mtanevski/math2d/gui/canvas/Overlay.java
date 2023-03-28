@@ -14,16 +14,19 @@ import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Translate;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
+
+import static com.mtanevski.math2d.gui.utils.FxUtil.switchNode;
 
 public class Overlay {
 
     public static final String ID = "overlay";
     public static Pane pane;
-    public static Map<Integer, DrawableVector> vectors = new HashMap<>();
-    private static Map<Integer, DrawablePoint> points = new HashMap<>();
+    private static final Map<Integer, DrawableVector> vectors = new HashMap<>();
+    private static final Map<Integer, DrawablePoint> points = new HashMap<>();
     private static Rectangle selectionRectangle;
     private static Translate translate;
     private static Point2D selectionStart;
@@ -132,11 +135,8 @@ public class Overlay {
         return pane.getScene();
     }
 
-    public static DrawableVector getVector(int hashCode) {
-        return vectors.get(hashCode);
+    public static Collection<DrawableVector> getVectors() {
+        return vectors.values();
     }
 
-    public static DrawablePoint getPoint(int hashCode) {
-        return points.get(hashCode);
-    }
 }

@@ -64,16 +64,20 @@ public class DrawablePoint {
         point2DProperty.set(point2D);
     }
 
-    public List<Node> getChildren() {
-        return children;
-    }
-
     public String getName() {
         return label.getText();
     }
 
     public void setName(String nextName) {
         this.label.setText(nextName);
+    }
+
+    public VBox getEditablePropertiesPane() {
+        return editablePropertiesPane;
+    }
+
+    public List<Node> getChildren() {
+        return children;
     }
 
     @Override

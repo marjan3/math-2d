@@ -1,6 +1,7 @@
 package com.mtanevski.math2d.gui.canvas.vector;
 
 import com.mtanevski.math2d.gui.Constants;
+import com.mtanevski.math2d.gui.canvas.EditablePropertiesPane;
 import com.mtanevski.math2d.gui.canvas.Overlay;
 import com.mtanevski.math2d.gui.commands.*;
 import com.mtanevski.math2d.gui.dialogs.InfoAlert;
@@ -30,7 +31,6 @@ public class DrawableVector {
     private final Polyline polyline;
     private final Circle invisibleCircle;
     private final List<Node> children = new ArrayList<>();
-    ;
     private final Label label;
     private final VBox editablePropertiesPane;
     private final ObjectProperty<Vector2D> vector2DProperty = new SimpleObjectProperty<>();
@@ -66,13 +66,19 @@ public class DrawableVector {
         return this.label.getText();
     }
 
+    public void setName(String nextName) {
+        this.label.setText(nextName);
+    }
+
+    public VBox getEditablePropertiesPane() {
+        return editablePropertiesPane;
+    }
+
     public List<Node> getChildren() {
         return this.children;
     }
 
-    public void setName(String nextName) {
-        this.label.setText(nextName);
-    }
+
 
     @Override
     public String toString() {

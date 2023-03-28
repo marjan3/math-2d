@@ -5,7 +5,10 @@ import com.mtanevski.math2d.gui.canvas.Overlay;
 import com.mtanevski.math2d.gui.canvas.point.DrawablePoint;
 import com.mtanevski.math2d.gui.dialogs.SimpleDialog;
 import javafx.application.Platform;
+import javafx.scene.layout.Pane;
 import lombok.ToString;
+
+import static com.mtanevski.math2d.gui.utils.FxUtil.switchNode;
 
 @ToString
 public class CreatePointCommand implements Command {
@@ -35,16 +38,16 @@ public class CreatePointCommand implements Command {
                     drawablePoint = new DrawablePoint(createRequest.getName(), createRequest.getX(), createRequest.getY());
                 }
             }
+            switchNode(Overlay.getScene(), drawablePoint.getEditablePropertiesPane(), Constants.Ids.PROPERTIES_PANE);
             Overlay.drawPoint(drawablePoint);
         });
     }
 
     @Override
     public void undo() {
-        Platform.runLater(() -> {
-            Overlay.deselectAll();
-            Overlay.remove(drawablePoint);
-        });
+        switchNode(drawablePoint.getChildren().get(0).getScene(), new Pane(), Constants.Ids.PROPERTIES_PANE);
+        Overlay.deselectAll();
+        Overlay.remove(drawablePoint);
     }
 
 }

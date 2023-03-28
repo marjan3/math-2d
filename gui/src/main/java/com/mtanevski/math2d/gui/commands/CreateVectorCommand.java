@@ -5,7 +5,10 @@ import com.mtanevski.math2d.gui.canvas.Overlay;
 import com.mtanevski.math2d.gui.canvas.vector.DrawableVector;
 import com.mtanevski.math2d.gui.dialogs.SimpleDialog;
 import javafx.application.Platform;
+import javafx.scene.layout.Pane;
 import lombok.ToString;
+
+import static com.mtanevski.math2d.gui.utils.FxUtil.switchNode;
 
 @ToString
 public class CreateVectorCommand implements Command {
@@ -35,12 +38,15 @@ public class CreateVectorCommand implements Command {
                     drawableVector = new DrawableVector(createRequest.getName(), createRequest.getX(), createRequest.getY());
                 }
             }
+
+            switchNode(Overlay.getScene(), drawableVector.getEditablePropertiesPane(), Constants.Ids.PROPERTIES_PANE);
             Overlay.drawVector(drawableVector);
         });
     }
 
     @Override
     public void undo() {
+        switchNode(drawableVector.getChildren().get(0).getScene(), new Pane(), Constants.Ids.PROPERTIES_PANE);
         Overlay.remove(drawableVector);
         Overlay.deselectAll();
     }
