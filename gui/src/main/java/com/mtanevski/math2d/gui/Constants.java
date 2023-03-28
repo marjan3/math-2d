@@ -9,6 +9,7 @@ public interface Constants {
     String[] OBJECTS = { POINT, VECTOR };
 
     interface Formats {
+        String RENAME_FORMAT = "Renaming '%s' ...";
         String CANVAS_COORDINATES_FORMAT = "%d, %d";
     }
 
@@ -53,6 +54,7 @@ public interface Constants {
         String PROJECTION_TIME = "Projection Time...";
         String ANGLE_BETWEEN = "Angle Between...";
         String DELETE = "Delete";
+        String RENAME = "Rename";
         String LEFT = "Left";
         String RIGHT = "Right";
         String OK = "OK";

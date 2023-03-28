@@ -22,8 +22,8 @@ public class Overlay {
 
     public static final String ID = "overlay";
     public static Pane pane;
-    public static Map<String, DrawableVector> vectors = new HashMap<>();
-    private static Map<String, DrawablePoint> points = new HashMap<>();
+    public static Map<Integer, DrawableVector> vectors = new HashMap<>();
+    private static Map<Integer, DrawablePoint> points = new HashMap<>();
     private static Rectangle selectionRectangle;
     private static Translate translate;
     private static Point2D selectionStart;
@@ -109,22 +109,22 @@ public class Overlay {
     }
 
     public static void drawPoint(DrawablePoint drawablePoint) {
-        points.put(drawablePoint.label.getText(), drawablePoint);
+        points.put(drawablePoint.hashCode(), drawablePoint);
         pane.getChildren().addAll(drawablePoint.getChildren());
     }
 
     public static void drawVector(DrawableVector drawableVector) {
-        vectors.put(drawableVector.label.getText(), drawableVector);
+        vectors.put(drawableVector.hashCode(), drawableVector);
         pane.getChildren().addAll(drawableVector.getChildren());
     }
 
     public static void remove(DrawableVector drawableVector) {
-        vectors.remove(drawableVector.label.getText());
+        vectors.remove(drawableVector.hashCode());
         pane.getChildren().removeAll(drawableVector.getChildren());
     }
 
     public static void remove(DrawablePoint drawablePoint) {
-        points.remove(drawablePoint.label.getText());
+        points.remove(drawablePoint.hashCode());
         pane.getChildren().removeAll(drawablePoint.getChildren());
     }
 
@@ -132,4 +132,11 @@ public class Overlay {
         return pane.getScene();
     }
 
+    public static DrawableVector getVector(int hashCode) {
+        return vectors.get(hashCode);
+    }
+
+    public static DrawablePoint getPoint(int hashCode) {
+        return points.get(hashCode);
+    }
 }

@@ -13,15 +13,11 @@ public class DeletePointCommand implements Command {
 
     @Override
     public void execute() {
-        Platform.runLater(() -> {
-            Overlay.remove(drawablePoint);
-        });
+        Overlay.remove(drawablePoint);
     }
 
     @Override
     public void undo() {
-        Platform.runLater(() -> {
-            Overlay.drawPoint(drawablePoint);
-        });
+        Overlay.drawPoint(drawablePoint);
     }
 }

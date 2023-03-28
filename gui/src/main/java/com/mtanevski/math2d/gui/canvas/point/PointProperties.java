@@ -50,7 +50,7 @@ public class PointProperties {
         // x
         xField.setText(String.valueOf(point2DProperty.get().x));
         xField.setTextFormatter(TextFormatters.newDoubleFormatter());
-        Bindings.bindBidirectional(xField.textProperty(), point2DProperty, new StringConverter<Point2D>() {
+        Bindings.bindBidirectional(xField.textProperty(), point2DProperty, new StringConverter<>() {
             @Override
             public String toString(Point2D point2D) {
                 return String.valueOf(point2D.x);

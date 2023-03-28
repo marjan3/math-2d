@@ -4,9 +4,11 @@ import com.mtanevski.math2d.gui.dialogs.NewObjectDialogResult;
 import com.mtanevski.math2d.math.Point2D;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Builder
 @Getter
+@ToString
 public class CreateRequest {
 
     private final String name;
@@ -15,7 +17,7 @@ public class CreateRequest {
 
     public static CreateRequest fromDialogResult(NewObjectDialogResult newDialogResult) {
         return CreateRequest.builder()
-                .name(newDialogResult.label)
+                .name(newDialogResult.name)
                 .x(newDialogResult.x)
                 .y(newDialogResult.y).
                 build();

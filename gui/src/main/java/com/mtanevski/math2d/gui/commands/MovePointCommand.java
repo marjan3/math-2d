@@ -1,8 +1,8 @@
 package com.mtanevski.math2d.gui.commands;
 
+import com.mtanevski.math2d.gui.canvas.Overlay;
 import com.mtanevski.math2d.gui.canvas.point.DrawablePoint;
 import com.mtanevski.math2d.math.Point2D;
-import javafx.application.Platform;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 
@@ -11,15 +11,15 @@ import lombok.ToString;
 public class MovePointCommand implements Command {
     private final DrawablePoint drawablePoint;
     private final Point2D previousLocation;
-    private final Point2D currentLocation;
+    private final Point2D nextLocation;
 
     @Override
     public void execute() {
-        Platform.runLater(() -> drawablePoint.move(currentLocation));
+        drawablePoint.move(nextLocation);
     }
 
     @Override
     public void undo() {
-        Platform.runLater(() -> drawablePoint.move(previousLocation));
+        drawablePoint.move(previousLocation);
     }
 }

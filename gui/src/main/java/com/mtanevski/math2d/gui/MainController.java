@@ -67,6 +67,8 @@ public class MainController extends VBox {
 
         // coordinate
         CoordinateSystem.draw(canvas, origin);
+        undoMenuItem.setDisable(true);
+        redoMenuItem.setDisable(true);
         CommandsManager.canUndoProperty.addListener((observableValue, oldValue, newValue) -> undoMenuItem.setDisable(!newValue));
         CommandsManager.canRedoProperty.addListener((observableValue, oldValue, newValue) -> redoMenuItem.setDisable(!newValue));
     }

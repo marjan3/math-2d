@@ -12,35 +12,32 @@ public class CommandsManager {
     private final static Stack<Command> undoStack = new Stack<>();
 
     public static void execute(Command command) {
-        canUndoProperty.setValue(canUndo());
-        canRedoProperty.setValue(canRedo());
         history.push(command);
+        updateProperties();
         command.execute();
     }
 
     public static void undo() {
-        canUndoProperty.setValue(canUndo());
-        canRedoProperty.setValue(canRedo());
-        if(canUndo()) {
+        if(!history.isEmpty()) {
             var lastUndoCommand = history.pop();
             undoStack.push(lastUndoCommand);
             lastUndoCommand.undo();
+            updateProperties();
         }
     }
 
     public static void redo() {
-        canUndoProperty.setValue(canUndo());
-        canRedoProperty.setValue(canRedo());
-        if(canRedo()) {
-            execute(undoStack.pop());
+        if(!undoStack.isEmpty()) {
+            var command = undoStack.pop();
+            history.push(command);
+            updateProperties();
+            command.execute();
         }
     }
 
-    public static boolean canUndo() {
-       return !history.isEmpty();
+    private static void updateProperties() {
+        canUndoProperty.setValue(!history.isEmpty());
+        canRedoProperty.setValue(!undoStack.isEmpty());
     }
 
-    public static boolean canRedo() {
-        return !undoStack.isEmpty();
-    }
 }

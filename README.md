@@ -35,7 +35,11 @@ This section will describe requirements needed to satisfy the installation or ru
 
 ## Future changes
 
-- undo/Redo is a bit clunky
+- Fix: on selection label moves
+- Selection is clunky
+- Undo: delete, X, Y, rename, add, subtract, perpendicular left and right
+- Map undo/redo to keys
+
 - implement other math operations
 - improve code, separation of concerns, single responsibility, reduce duplication, maybe event buss
 - always expand Inspect accordions

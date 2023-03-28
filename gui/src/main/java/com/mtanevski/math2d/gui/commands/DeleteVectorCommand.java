@@ -13,15 +13,11 @@ public class DeleteVectorCommand implements Command {
 
     @Override
     public void execute() {
-        Platform.runLater(() -> {
-            Overlay.remove(drawableVector);
-        });
+        Overlay.remove(drawableVector);
     }
 
     @Override
     public void undo() {
-        Platform.runLater(() -> {
-            Overlay.drawVector(drawableVector);
-        });
+        Overlay.drawVector(drawableVector);
     }
 }
