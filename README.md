@@ -41,7 +41,12 @@ This section will describe requirements needed to satisfy the installation or ru
 
 ## Future changes
 
-- implement other math operations
+- make sure the dot product and other scalar values can be copied
+- improve colors when selecting vectors and points
+- colorize vectors, change color context menu
+- zoom in/out function
+- implement cross product, get projection point, get vector, shortenLength
+
 - separation of concerns, maybe event bus
 - always expand Inspect accordions
 - write unit tests
