@@ -46,6 +46,8 @@ This section will describe requirements needed to satisfy the installation or ru
 - colorize vectors, change color context menu
 - zoom in/out function
 - implement cross product, get projection point, get vector, shortenLength
+- docs under operations
+- Open, Save, Save as functionality
 
 - separation of concerns, maybe event bus
 - always expand Inspect accordions
