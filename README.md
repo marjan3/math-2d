@@ -45,7 +45,7 @@ This section will describe requirements needed to satisfy the installation or ru
 - improve colors when selecting vectors and points
 - colorize vectors, change color context menu
 - zoom in/out function
-- implement cross product, get projection point, get vector, shortenLength
+- implement cross product, get projection point, get vector, shortenLength, midpoint
 - docs under operations
 - Open, Save, Save as functionality
 
