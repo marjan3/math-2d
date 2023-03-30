@@ -8,6 +8,7 @@ public interface Constants {
     String VECTOR = "Vector";
     String[] OBJECTS = {POINT, VECTOR};
 
+
     enum Origin {
         CENTER,
         DEFAULT,
@@ -34,7 +35,6 @@ public interface Constants {
     }
 
     interface Ids {
-        String OVERLAY = "overlay";
         String PROPERTIES_PANE = "#propertiesPane";
     }
 
@@ -45,6 +45,10 @@ public interface Constants {
         String VECTOR_2D_PROPERTIES_FXML = "/vector2d/properties.fxml";
         String SMALL_CIRCLE_PNG = "small-circle.png";
         String ARROW_DOWN_RIGHT_PNG = "arrow-down-right.png";
+    }
+
+    interface Styles {
+        String ALERT_TEXT_FIELD_STYLE = "-fx-font-size: 1.5em;";
     }
 
     interface Labels {
@@ -63,7 +67,6 @@ public interface Constants {
         String LEFT = "Left";
         String RIGHT = "Right";
         String OK = "OK";
-        String INFORMATION_DIALOG = "Information Dialog";
         String NAME = "Name";
         String X = "X";
         String Y = "Y";

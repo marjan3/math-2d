@@ -41,7 +41,6 @@ This section will describe requirements needed to satisfy the installation or ru
 
 ## Future changes
 
-- make sure the dot product and other scalar values can be copied
 - improve colors when selecting vectors and points
 - colorize vectors, change color context menu
 - zoom in/out function

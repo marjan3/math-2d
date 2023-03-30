@@ -10,6 +10,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.ToolBar?>
@@ -21,7 +22,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="770.0" prefWidth="1385.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="770.0" prefWidth="1385.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <MenuBar>
             <menus>
@@ -95,7 +96,7 @@
                 </VBox>
                 <ScrollPane HBox.hgrow="ALWAYS">
                     <content>
-                        <AnchorPane maxHeight="-1.0" maxWidth="-1.0">
+                        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="700.0" prefWidth="898.0">
                             <children>
                                 <Canvas fx:id="canvas" height="600.0" layoutX="179.0" layoutY="69.0" width="800.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
                                 <Label layoutX="14.0" layoutY="14.0" text="Canvas" />
@@ -111,7 +112,7 @@
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0">
                                             <children>
-                                                <VBox fx:id="propertiesPane" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <VBox fx:id="propertiesPane" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
                                                 </VBox>
                                             </children>
                                         </AnchorPane>
@@ -167,11 +168,7 @@
                         <Insets left="20.0" />
                     </padding>
                 </Label>
-                <Label text="Pointer Coordinates:">
-                    <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                    </padding>
-                </Label>
+            <Slider min="-100.0" prefHeight="17.0" prefWidth="120.0" />
             </items>
         </ToolBar>
     </children>

@@ -186,18 +186,18 @@ public class DrawableVector {
             var item = (MenuItem) e.getTarget();
             var target = ((DrawableVector) item.getUserData()).vector2DProperty.get();
             var source = this.vector2DProperty.get();
-            source.add(target);
+            var result = Vector2D.add(source, target);
             var aPlusBLabel = "(" + this.label.getText() + ") + " + item.getText();
-            var newDialogResult = SimpleDialog.showXYDialog(aPlusBLabel, aPlusBLabel, source.x, source.y);
+            var newDialogResult = SimpleDialog.showXYDialog(aPlusBLabel, aPlusBLabel, result.x, result.y);
             CommandsManager.execute(new CreateVectorCommand(CreateRequest.fromDialogResult(newDialogResult)));
         });
         contextMenu.setHandleSubtract(e -> {
             var item = (MenuItem) e.getTarget();
             var target = ((DrawableVector) item.getUserData()).vector2DProperty.get();
             var source = this.vector2DProperty.get();
-            source.subtract(target);
+            var result = Vector2D.subtract(source, target);
             var aPlusBLabel = "(" + this.label.getText() + ") - " + item.getText();
-            var newDialogResult = SimpleDialog.showXYDialog(aPlusBLabel, aPlusBLabel, source.x, source.y);
+            var newDialogResult = SimpleDialog.showXYDialog(aPlusBLabel, aPlusBLabel, result.x, result.y);
             CommandsManager.execute(new CreateVectorCommand(CreateRequest.fromDialogResult(newDialogResult)));
         });
         contextMenu.setOnPerpendicularVector(e -> {
@@ -222,7 +222,7 @@ public class DrawableVector {
             var source = this.vector2DProperty.get();
             double dotProduct = Vector2D.getDotProduct(source, target);
             String aAndB = this.label.getText() + " and " + item.getText();
-            InfoAlert.alert("Dot Product between " + aAndB, "Dot product is: " + dotProduct);
+            InfoAlert.alert("Dot Product between " + aAndB, "Dot product", String.valueOf(dotProduct));
         });
         contextMenu.setOnPerpendicularProduct(e -> {
             var item = (MenuItem) e.getTarget();
@@ -230,7 +230,7 @@ public class DrawableVector {
             var source = this.vector2DProperty.get();
             double perpendicularProduct = Math.toDegrees(Vector2D.getPerpendicularProduct(source, target));
             String sourceAndTarget = this.label.getText() + " and " + item.getText();
-            InfoAlert.alert("The perpendicular product between " + sourceAndTarget, "The perpendicular product is: " + perpendicularProduct);
+            InfoAlert.alert("The perpendicular product between " + sourceAndTarget, "The perpendicular product", String.valueOf(perpendicularProduct));
         });
         contextMenu.setOnProjectionTime(e -> {
             var item = (MenuItem) e.getTarget();
@@ -238,7 +238,7 @@ public class DrawableVector {
             var source = this.vector2DProperty.get();
             double projectionTime = Math.toDegrees(Vector2D.getProjectionTime(source, target));
             String sourceAndTarget = this.label.getText() + " and " + item.getText();
-            InfoAlert.alert("The projection time between " + sourceAndTarget, "The projection time is: " + projectionTime);
+            InfoAlert.alert("The projection time between " + sourceAndTarget, "The projection", String.valueOf(projectionTime));
         });
         contextMenu.setOnAngleBetween(e -> {
             var item = (MenuItem) e.getTarget();
@@ -246,7 +246,7 @@ public class DrawableVector {
             var source = this.vector2DProperty.get();
             double angle = Math.toDegrees(Vector2D.getAngle(source, target));
             String aAndB = this.label.getText() + " and " + item.getText();
-            InfoAlert.alert("Angle (in degrees) between " + aAndB, "The angle (in degrees) is: " + angle);
+            InfoAlert.alert("Angle (in degrees) between " + aAndB, "The angle (in degrees)" + angle, String.valueOf(angle));
         });
         label.setOnContextMenuRequested(contextMenu.getEventHandler());
         polyline.setOnContextMenuRequested(contextMenu.getEventHandler());
