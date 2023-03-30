@@ -1,5 +1,6 @@
 package com.mtanevski.math2d.math;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -42,7 +43,7 @@ public class Vector2D implements Cloneable {
      * @return the calculated dot product
      */
     public static double getDotProduct(Vector2D a, Vector2D b) {
-        return a.x * b.x + a.y * b.y;
+        return (a.x * b.x) + (a.y * b.y);
     }
 
     /**
@@ -78,6 +79,24 @@ public class Vector2D implements Cloneable {
      */
     public static Point2D getProjectionPoint(Point2D p, Vector2D b, double t) {
         return new Point2D(p.x + t * b.x, p.y + t * b.y);
+    }
+
+    /**
+     * Reflect a vector again a normal
+     *
+     * @param vectorToReflect The vector to reflect
+     * @param normal The normal to reflect against
+     * @return a new reflected vector
+     */
+    public static List<Vector2D> reflect(Vector2D vectorToReflect, Vector2D normal) {
+        Vector2D normalizedNormal = Vector2D.normalize(normal);
+
+        double dotProduct = Vector2D.getDotProduct(normalizedNormal, vectorToReflect);
+        var x = dotProduct * normalizedNormal.x;
+        var y = dotProduct * normalizedNormal.y;
+        var projectedVector = Vector2D.of(x, y);
+        Vector2D multipliedByTwo = Vector2D.multiply(Vector2D.of(x, y), 2);
+        return List.of(Vector2D.subtract(vectorToReflect, multipliedByTwo), projectedVector);
     }
 
     /**
@@ -191,6 +210,16 @@ public class Vector2D implements Cloneable {
         x /= length;
         y /= length;
         return this;
+    }
+
+    /**
+     * Same as {@link Vector2D#normalize()} but static
+     */
+    public static Vector2D normalize(Vector2D vector2D) {
+        double length = vector2D.getLength();
+        double newX = vector2D.x / length;
+        double newY = vector2D.y / length;
+        return Vector2D.of(newX, newY);
     }
 
     /**

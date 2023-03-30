@@ -7,6 +7,7 @@ import com.mtanevski.math2d.gui.commands.*;
 import com.mtanevski.math2d.gui.dialogs.InfoAlert;
 import com.mtanevski.math2d.gui.dialogs.SimpleDialog;
 import com.mtanevski.math2d.gui.utils.Calculator;
+import com.mtanevski.math2d.math.Point2D;
 import com.mtanevski.math2d.math.Vector2D;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -247,6 +248,23 @@ public class DrawableVector {
             double angle = Math.toDegrees(Vector2D.getAngle(source, target));
             String aAndB = this.label.getText() + " and " + item.getText();
             InfoAlert.alert("Angle (in degrees) between " + aAndB, "The angle (in degrees)" + angle, String.valueOf(angle));
+        });
+        contextMenu.setOnReflect(e -> {
+            var item = (MenuItem) e.getTarget();
+            var target = ((DrawableVector) item.getUserData()).vector2DProperty.get();
+            var source = this.vector2DProperty.get();
+            var result = Vector2D.reflect(source, target);
+            String name = "Reflect of " + this.label.getText() + " against " + item.getText();
+            var reflectedVectorRequest = CreateRequest.builder()
+                    .x(result.get(0).x)
+                    .y(result.get(0).y)
+                    .name(name).build();
+            CommandsManager.execute(new CreateVectorCommand(reflectedVectorRequest));
+            var projectedVectorRequest = CreateRequest.builder()
+                    .x(result.get(1).x)
+                    .y(result.get(1).y)
+                    .name("Projected vector on normal " +  this.label.getText() + " against " + item.getText()).build();
+            CommandsManager.execute(new CreateVectorCommand(projectedVectorRequest));
         });
         label.setOnContextMenuRequested(contextMenu.getEventHandler());
         polyline.setOnContextMenuRequested(contextMenu.getEventHandler());

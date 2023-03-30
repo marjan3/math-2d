@@ -21,6 +21,7 @@ public class VectorContextMenu extends ContextMenu {
     private final Menu perpendicularProductMenu;
     private final Menu projectionTimeMenu;
     private final Menu angleBetweenMenu;
+    private final Menu reflectMenu;
     private final MenuItem deleteItem;
     private final MenuItem renameItem;
 
@@ -31,6 +32,7 @@ public class VectorContextMenu extends ContextMenu {
     private EventHandler<ActionEvent> handlePerpendicularProduct;
     private EventHandler<ActionEvent> handleProjectionTime;
     private EventHandler<ActionEvent> handleAngleBetween;
+    private EventHandler<ActionEvent> handleReflect;
     private EventHandler<ActionEvent> handleDelete;
     private EventHandler<ActionEvent> handleRename;
 
@@ -43,6 +45,7 @@ public class VectorContextMenu extends ContextMenu {
         perpendicularProductMenu = new Menu(Constants.Labels.PERPENDICULAR_PRODUCT);
         projectionTimeMenu = new Menu(Constants.Labels.PROJECTION_TIME);
         angleBetweenMenu = new Menu(Constants.Labels.ANGLE_BETWEEN);
+        reflectMenu = new Menu(Constants.Labels.REFLECT);
         deleteItem = new MenuItem(Constants.Labels.DELETE);
         renameItem = new MenuItem(Constants.Labels.RENAME);
         this.getItems().addAll(
@@ -52,7 +55,8 @@ public class VectorContextMenu extends ContextMenu {
                 perpendicularVectorMenu,
                 perpendicularProductMenu,
                 projectionTimeMenu,
-                angleBetweenMenu);
+                angleBetweenMenu,
+                reflectMenu);
 
         this.getItems().addAll(new SeparatorMenuItem(), renameItem, new SeparatorMenuItem(), deleteItem);
     }
@@ -80,6 +84,7 @@ public class VectorContextMenu extends ContextMenu {
             perpendicularProductMenu.getItems().forEach(item -> item.setOnAction(this.handlePerpendicularProduct));
             projectionTimeMenu.getItems().forEach(item -> item.setOnAction(this.handleProjectionTime));
             angleBetweenMenu.getItems().forEach(item -> item.setOnAction(this.handleAngleBetween));
+            reflectMenu.getItems().forEach(item -> item.setOnAction(this.handleReflect));
             deleteItem.setOnAction(this.handleDelete);
             renameItem.setOnAction(this.handleRename);
             this.show((Node) e.getSource(), Side.RIGHT, 0, 0);
@@ -116,6 +121,9 @@ public class VectorContextMenu extends ContextMenu {
 
     public void setOnAngleBetween(EventHandler<ActionEvent> eventHandler) {
         this.handleAngleBetween = eventHandler;
+    }
+    public void setOnReflect(EventHandler<ActionEvent> eventHandler) {
+        this.handleReflect = eventHandler;
     }
 
     public void setOnRename(EventHandler<ActionEvent> eventHandler) {

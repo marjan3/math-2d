@@ -70,6 +70,7 @@ public interface Constants {
         String NAME = "Name";
         String X = "X";
         String Y = "Y";
+        String REFLECT = "Reflect against...";
     }
 
     interface Canvas {
