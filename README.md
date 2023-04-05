@@ -41,6 +41,7 @@ This section will describe requirements needed to satisfy the installation or ru
 
 ## Future changes
 
+- animate operations for vectors
 - improve colors when selecting vectors and points
 - colorize vectors, change color context menu
 - zoom in/out function
