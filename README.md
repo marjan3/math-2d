@@ -41,12 +41,13 @@ This section will describe requirements needed to satisfy the installation or ru
 
 ## Future changes
 
-- animate operations for vectors
 - improve colors when selecting vectors and points
-- colorize vectors, change color context menu
 - zoom in/out function
-- implement cross product, get projection point, get vector, shortenLength, midpoint
+- colorize vectors, change color context menu
+- Move length to calculated
+- animate operations for vectors
 - docs under operations
+- implement cross product, get projection point, get vector, shortenLength, midpoint
 - Open, Save, Save as functionality
 
 - separation of concerns, maybe event bus
